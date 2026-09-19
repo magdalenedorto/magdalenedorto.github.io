@@ -3,126 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magdalene Dorto | Commercial Diplomacy & Data Analytics</title>
-    <!-- Secure CDN for Tailwind CSS & Chart.js -->
+    <title>Magdalene Dorto | International Relations, Youth Advocacy & Diplomacy</title>
+    <!-- Tailwind CSS CDN & Font Awesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-sky-500 selection:text-slate-950">
 
     <!-- Navigation Header -->
     <nav class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="text-xl font-bold tracking-wider text-amber-400">M. DORTO</span>
-            <div class="space-x-6 text-sm font-medium text-slate-300">
-                <a href="#about" class="hover:text-amber-400 transition">About</a>
-                <a href="#projects" class="hover:text-amber-400 transition">Projects</a>
-                <a href="#contact" class="hover:text-amber-400 transition">Contact</a>
+            <span class="text-xl font-bold tracking-wider text-sky-400">MAGDALENE DORTO</span>
+            
+            <div class="flex items-center space-x-6">
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-slate-300">
+                    <a href="#about" class="hover:text-sky-400 transition" id="nav-about">About</a>
+                    <a href="#advocacy" class="hover:text-sky-400 transition" id="nav-advocacy">Advocacy & Impact</a>
+                    <a href="#flagship" class="hover:text-sky-400 transition" id="nav-flagship">#16days4amilliongirls</a>
+                    <a href="#linguistics" class="hover:text-sky-400 transition" id="nav-lang">Linguistics & Aspirations</a>
+                    <a href="#certificates" class="hover:text-sky-400 transition" id="nav-cert">Honors & Certs</a>
+                    <a href="#contact" class="hover:text-sky-400 transition" id="nav-contact">Contact</a>
+                </div>
+
+                <!-- Language Selector -->
+                <div class="flex bg-slate-800 p-1 rounded-lg border border-slate-700 text-xs font-bold">
+                    <button onclick="setLanguage('en')" id="btn-en" class="px-2.5 py-1 rounded bg-sky-500 text-slate-950 transition">EN</button>
+                    <button onclick="setLanguage('es')" id="btn-es" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">ES</button>
+                    <button onclick="setLanguage('fr')" id="btn-fr" class="px-2.5 py-1 rounded text-slate-400 hover:text-white transition">FR</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="about" class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <span class="text-amber-400 font-semibold tracking-wide uppercase text-sm">Commercial Diplomacy & Quantitative Analysis</span>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mt-2 leading-tight">Bridging International Relations with Data Science.</h1>
-            <p class="mt-4 text-slate-400 leading-relaxed">
-                Undergraduate in European Languages (Spanish Major, French Minor). Specializing in data-driven foreign policy, market feasibility analysis, and economic diplomacy across Ibero-American trade corridors.
+    <!-- Hero / Intro Section -->
+    <header id="about" class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+            <span id="hero-tag" class="text-sky-400 font-semibold tracking-wide uppercase text-sm">Ghanaian Youth & SRHR Advocate | Multilingual Specialist</span>
+            <h1 id="hero-title" class="text-4xl lg:text-5xl font-extrabold text-white mt-2 leading-tight">Championing Youth Voices, SRHR & Digital Health for Global Change.</h1>
+            <p id="hero-desc" class="mt-4 text-slate-300 leading-relaxed text-base">
+                I am a final-year Spanish Major and French Minor at the University of Ghana, a Kufuor Scholar, online language tutor, and dedicated SRHR advocate. Bringing nearly a decade of national, regional, and global experience, I work at the intersection of youth empowerment, digital health mapping, and international development.
             </p>
             <div class="mt-6 flex flex-wrap gap-4">
-                <a href="#projects" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-6 py-3 rounded-lg transition shadow-lg shadow-amber-500/20">View Featured Case Study</a>
-                <a href="#contact" class="border border-slate-700 hover:border-slate-500 text-slate-300 font-semibold px-6 py-3 rounded-lg transition">Get in Touch</a>
+                <a href="#contact" id="btn-touch" class="bg-sky-500 hover:bg-sky-600 text-slate-950 font-bold px-6 py-3 rounded-lg transition shadow-lg shadow-sky-500/20">Collaborate With Me</a>
+                <a href="#flagship" id="btn-flagship" class="border border-slate-700 hover:border-sky-400 text-slate-200 font-semibold px-6 py-3 rounded-lg transition">Explore Flagship Project</a>
             </div>
         </div>
-        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50 shadow-2xl">
-            <h3 class="text-lg font-bold text-slate-200 mb-4"><i class="fa-solid fa-earth-americas text-amber-400 mr-2"></i> Core Competencies</h3>
-            <ul class="space-y-3 text-slate-300 text-sm">
-                <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-3"></i> <span><strong>Multilingual Access:</strong> Professional fluency in English, Spanish, and French.</span></li>
-                <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-3"></i> <span><strong>Trade Analytics:</strong> UN Comtrade data extraction, market clustering (K-Means), and tariff evaluation.</span></li>
-                <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-3"></i> <span><strong>Policy Briefings:</strong> Translating quantitative findings into diplomatic strategy memos.</span></li>
-            </ul>
+        
+        <!-- Profile Picture Card -->
+        <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md bg-slate-900 p-4 rounded-2xl border border-slate-800 shadow-2xl">
+                <!-- Replace with your actual photo path: images/magdalene.jpg -->
+                <img src="images/magdalene.jpg" alt="Magdalene Dorto" class="w-full h-80 object-cover rounded-xl mb-4 border border-slate-800">
+                <div class="space-y-2">
+                    <h3 class="text-lg font-bold text-white">Magdalene Dorto</h3>
+                    <p class="text-xs text-sky-400"><i class="fa-solid fa-location-dot mr-1"></i> Accra / North Tongu District, Ghana</p>
+                    <p class="text-xs text-slate-400">Trilingual: English (Fluent), Spanish (Advanced), French (Intermediate)</p>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Featured Case Study -->
-    <section id="projects" class="max-w-7xl mx-auto px-6 py-16 border-t border-slate-800">
+    <!-- Mission, Vision & Core Values Section -->
+    <section class="bg-slate-900/60 border-y border-slate-800 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/50 transition">
+                <div class="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-compass"></i></div>
+                <h3 id="mv-mission-title" class="text-lg font-bold text-white mb-2">My Mission</h3>
+                <p id="mv-mission-desc" class="text-sm text-slate-300 leading-relaxed">To utilize multilingual communication, visual advocacy, and human-centered design to ensure language and socio-economic barriers never prevent youth from accessing SRHR and digital health resources.</p>
+            </div>
+            <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/50 transition">
+                <div class="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-eye"></i></div>
+                <h3 id="mv-vision-title" class="text-lg font-bold text-white mb-2">My Vision</h3>
+                <p id="mv-vision-desc" class="text-sm text-slate-300 leading-relaxed">A global landscape where youth across Africa and Ibero-America actively shape international development policies, diplomatic frameworks, and healthcare access.</p>
+            </div>
+            <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/50 transition">
+                <div class="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-heart"></i></div>
+                <h3 id="mv-values-title" class="text-lg font-bold text-white mb-2">Core Values</h3>
+                <p id="mv-values-desc" class="text-sm text-slate-300 leading-relaxed">Youth Leadership, Inclusivity & Diversity, Grassroots Integrity, Multilingual Diplomacy, and Data-Driven Advocacy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advocacy Journey: National & Global Consultancies -->
+    <section id="advocacy" class="max-w-7xl mx-auto px-6 py-20">
         <div class="mb-12">
-            <span class="text-amber-400 font-semibold uppercase text-xs tracking-wider">Featured Commercial Diplomacy Project</span>
-            <h2 class="text-3xl font-bold text-white mt-1">Exporting Ghanaian Artisanal Textiles (Fugu) to Latin America</h2>
-            <p class="text-slate-400 mt-2 max-w-3xl">A quantitative feasibility study combining machine learning market segmentation with bilateral trade strategy to identify high-potential Ibero-American export markets.</p>
+            <span id="adv-tag" class="text-sky-400 font-semibold uppercase text-xs tracking-wider">Impact & Experience</span>
+            <h2 id="adv-title" class="text-3xl font-bold text-white mt-1">Advocacy Journey: National & Global Engagements</h2>
+            <p id="adv-desc" class="text-slate-400 mt-2 max-w-3xl">Nearly a decade collaborating with leading international development organizations, multilateral bodies, and local communities.</p>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Interactive Data Visualization Chart -->
-            <div class="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-6 rounded-xl">
-                <h3 class="text-lg font-bold text-slate-200 mb-2">Target Market Feasibility Clusters (K-Means Analysis)</h3>
-                <p class="text-xs text-slate-400 mb-6">Grouping 20 Latin American countries by trade tariff scores, cultural affinity metrics, and purchasing power index.</p>
-                <div class="h-64">
-                    <canvas id="marketChart"></canvas>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- UNFPA Consultancy -->
+            <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-xl flex flex-col justify-between hover:border-sky-500/40 transition">
+                <div>
+                    <span class="text-xs text-sky-400 font-bold uppercase tracking-wide">2-Year Consultancy</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-3">UNFPA Global Academy</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Co-designed the Digital Global Comprehensive Sexuality Education (CSE) Course in partnership with Rutgers International and Planned Parenthood Association of Ghana (PPAG).</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Multilateral Collaboration</span>
+                    <i class="fa-solid fa-globe text-sky-400"></i>
                 </div>
             </div>
 
-            <!-- Project Key Highlights -->
-            <div class="bg-slate-800/40 border border-slate-700 p-6 rounded-xl flex flex-col justify-between">
+            <!-- IPPF Think Tank -->
+            <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-xl flex flex-col justify-between hover:border-sky-500/40 transition">
                 <div>
-                    <h4 class="font-bold text-amber-400 mb-2"><i class="fa-solid fa-lightbulb mr-2"></i> Executive Key Finding</h4>
-                    <p class="text-sm text-slate-300 leading-relaxed">
-                        Tier 1 markets (e.g., Brazil & Colombia) exhibit strong cultural synergy with handwoven textiles and maintain a 22% lower trade entry barrier compared to regional averages when utilizing targeted bilateral cultural agreements.
-                    </p>
+                    <span class="text-xs text-sky-400 font-bold uppercase tracking-wide">Global Youth Leadership</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-3">IPPF Global Youth Connect</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Serving as a Think Tank Member representing youth perspectives on global SRHR frameworks, policy formulation, and regional youth rights strategies.</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/60">
-                    <span class="text-xs text-slate-400 block mb-2">Technologies & Sources Used:</span>
-                    <div class="flex flex-wrap gap-2 text-xs">
-                        <span class="bg-slate-700 text-slate-300 px-2.5 py-1 rounded">Python (Pandas, Scikit-Learn)</span>
-                        <span class="bg-slate-700 text-slate-300 px-2.5 py-1 rounded">UN Comtrade API</span>
-                        <span class="bg-slate-700 text-slate-300 px-2.5 py-1 rounded">World Bank Data</span>
-                    </div>
+                <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>IPPF Think Tank</span>
+                    <i class="fa-solid fa-users text-sky-400"></i>
+                </div>
+            </div>
+
+            <!-- Oxfam Power to Choose -->
+            <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-xl flex flex-col justify-between hover:border-sky-500/40 transition">
+                <div>
+                    <span class="text-xs text-sky-400 font-bold uppercase tracking-wide">International Forum</span>
+                    <h3 class="text-xl font-bold text-white mt-2 mb-3">Oxfam Power to Choose Forum</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">Represented Ghanaian youth voices at the global forum, driving dialogue on gender equality, anti-SGBV strategies, and youth-led social change.</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Oxfam & GAC Supported</span>
+                    <i class="fa-solid fa-hand-holding-heart text-sky-400"></i>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer & Contact -->
+    <!-- Flagship Project: #16days4amilliongirls -->
+    <section id="flagship" class="bg-slate-900/60 border-y border-slate-800 py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6">
+                    <span class="text-sky-400 font-semibold uppercase text-xs tracking-wider">Flagship Anti-SGBV Initiative</span>
+                    <h2 class="text-3xl font-bold text-white mt-2">#16days4amilliongirls Mural Advocacy Project</h2>
+                    <p class="text-slate-300 mt-4 leading-relaxed text-sm">
+                        As the founder of <strong>#16days4amilliongirls</strong>, I designed and executed a multi-community mural art project across the North Tongu District of Ghana (Volo, Mepe, Battor, and Aveyime). By utilizing visual community art as a non-verbal advocacy tool, the project engaged <strong>866 young people</strong> on anti-SGBV awareness and SRHR rights with support from Oxfam and Global Affairs Canada.
+                    </p>
+                    <div class="mt-6 space-y-3 text-sm text-slate-300">
+                        <div class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-3"></i> <span>Reached 866+ youth across 4 district communities</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-3"></i> <span>Supported by Oxfam & Global Affairs Canada</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-check text-sky-400 mr-3"></i> <span>Community-led mural art & visual advocacy tools</span></div>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="https://facebook.com" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-slate-950 font-bold px-5 py-2.5 rounded-lg text-sm transition flex items-center">
+                            <i class="fa-brands fa-facebook mr-2"></i> Watch the Documentary
+                        </a>
+                        <a href="#donate" class="border border-slate-700 hover:border-sky-400 text-slate-200 px-5 py-2.5 rounded-lg text-sm transition">Support Future Campaigns</a>
+                    </div>
+                </div>
+
+                <!-- Picture Gallery Preview -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <img src="images/mural1.jpg" alt="Community Mural Art" class="rounded-lg border border-slate-800 w-full h-40 object-cover">
+                    <img src="images/mural2.jpg" alt="Youth Engagement Session" class="rounded-lg border border-slate-800 w-full h-40 object-cover">
+                    <img src="images/mural3.jpg" alt="North Tongu Community" class="rounded-lg border border-slate-800 w-full h-40 object-cover">
+                    <img src="images/mural4.jpg" alt="Documentary Filming" class="rounded-lg border border-slate-800 w-full h-40 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Linguistic Competence & Career Aspirations in International Relations -->
+    <section id="linguistics" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 bg-slate-900/60 border border-slate-800 p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold text-white mb-6"><i class="fa-solid fa-language text-sky-400 mr-3"></i> Linguistic Competence</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>English</span>
+                            <span class="text-sky-400">Native / Professional Mastery</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-sky-400 h-2 rounded-full w-full"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>Spanish (Español)</span>
+                            <span class="text-sky-400">Advanced Academic Proficiency</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-sky-400 h-2 rounded-full w-9/12"></div></div>
+                        <p class="text-xs text-slate-400 mt-1">Undergraduate Major, University of Ghana. Focus on Discourse Analysis & Literary Traditions.</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>French (Français)</span>
+                            <span class="text-sky-400">Intermediate Professional Working</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full"><div class="bg-sky-400 h-2 rounded-full w-7/12"></div></div>
+                        <p class="text-xs text-slate-400 mt-1">Undergraduate Minor, Department of European Languages.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <span class="text-sky-400 font-semibold uppercase text-xs tracking-wider">Future Trajectory</span>
+                <h2 class="text-3xl font-bold text-white mt-2">Career Aspirations & Openings</h2>
+                <p class="text-slate-300 mt-4 leading-relaxed text-sm">
+                    Driven by a commitment to international cooperation, I spent four years mastering Spanish alongside French to ensure language is never a barrier to cross-cultural diplomacy and development.
+                </p>
+                <p class="text-slate-300 mt-3 leading-relaxed text-sm">
+                    I am actively seeking opportunities in:
+                </p>
+                <ul class="mt-4 space-y-2 text-sm text-slate-300">
+                    <li class="flex items-center"><i class="fa-solid fa-angle-right text-sky-400 mr-2"></i> Postgraduate Master’s programs in International Relations, Development, or Diplomacy (Spanish-speaking regions).</li>
+                    <li class="flex items-center"><i class="fa-solid fa-angle-right text-sky-400 mr-2"></i> Remote consultancies & project collaborations in youth digital health and SRHR.</li>
+                    <li class="flex items-center"><i class="fa-solid fa-angle-right text-sky-400 mr-2"></i> Diplomatic internships & bilateral exchange engagements.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honors, Fellowships & Success Stories -->
+    <section id="certificates" class="bg-slate-900/60 border-y border-slate-800 py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12">
+                <span class="text-sky-400 font-semibold uppercase text-xs tracking-wider">Recognition & Academic Excellence</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Honors, Fellowships & Success Stories</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/40 transition">
+                    <div class="text-sky-400 text-2xl mb-3"><i class="fa-solid fa-award"></i></div>
+                    <h3 class="text-lg font-bold text-white">Kufuor Scholar</h3>
+                    <p class="text-sm text-slate-300 mt-2">Selected for prestigious leadership training and governance mentorship under the John A. Kufuor Foundation.</p>
+                </div>
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/40 transition">
+                    <div class="text-sky-400 text-2xl mb-3"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3 class="text-lg font-bold text-white">University of Ghana Scholar</h3>
+                    <p class="text-sm text-slate-300 mt-2">Final-year Spanish Major and French Minor, conducting research on mobile-assisted language learning and discourse analysis.</p>
+                </div>
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-800 hover:border-sky-500/40 transition">
+                    <div class="text-sky-400 text-2xl mb-3"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <h3 class="text-lg font-bold text-white">Multilingual Online Educator</h3>
+                    <p class="text-sm text-slate-300 mt-2">Providing Spanish and English instruction to diverse learners, supporting global language acquisition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support / Donate Module -->
+    <section id="donate" class="max-w-7xl mx-auto px-6 py-16 text-center">
+        <div class="bg-gradient-to-r from-sky-500/10 via-slate-900 to-sky-500/10 border border-sky-500/30 p-10 rounded-2xl">
+            <h2 class="text-2xl lg:text-3xl font-bold text-white mb-3">Support Youth & SRHR Mural Advocacy</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto text-sm mb-6">Partner with us or support our grassroots mural campaigns to expand anti-SGBV education and youth digital health access across rural Ghana.</p>
+            <a href="mailto:dortomagdalene16@gmail.com?subject=Inquiry%20regarding%20Supporting%20Mural%20Advocacy" class="bg-sky-500 hover:bg-sky-600 text-slate-950 font-bold px-8 py-3 rounded-lg transition shadow-lg shadow-sky-500/20">Partner or Support</a>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
     <footer id="contact" class="border-t border-slate-800 bg-slate-950 py-12 px-6">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
                 <h3 class="text-lg font-bold text-white">Magdalene Dorto</h3>
-                <p class="text-sm text-slate-400">International Relations & Commercial Diplomacy Portfolio</p>
+                <p id="footer-subtitle" class="text-sm text-slate-400">International Relations, Youth SRHR Advocacy & Diplomacy Portfolio</p>
             </div>
-            <div class="flex gap-6 text-slate-400 text-xl">
-                <a href="#" class="hover:text-amber-400 transition" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#" class="hover:text-amber-400 transition" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:magdalene.dorto@gmail.com" class="hover:text-amber-400 transition" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <div class="flex gap-6 text-slate-400 text-xl items-center">
+                <a href="mailto:dortomagdalene16@gmail.com" class="hover:text-sky-400 transition" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-sky-400 transition" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://facebook.com" target="_blank" class="hover:text-sky-400 transition" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Chart Script -->
+    <!-- JavaScript Translations Script -->
     <script>
-        const ctx = document.getElementById('marketChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Tier 1: High Demand / Low Duty', 'Tier 2: High Demand / High Duty', 'Tier 3: Emerging Markets'],
-                datasets: [{
-                    label: 'Export Viability Index Score',
-                    data: [88, 62, 35],
-                    backgroundColor: ['#f59e0b', '#64748b', '#334155'],
-                    borderRadius: 6
-                }]
+        const translations = {
+            en: {
+                navAbout: "About", navAdvocacy: "Advocacy & Impact", navFlagship: "#16days4amilliongirls",
+                navLang: "Linguistics & Aspirations", navCert: "Honors & Certs", navContact: "Contact",
+                heroTag: "Ghanaian Youth & SRHR Advocate | Multilingual Specialist",
+                heroTitle: "Championing Youth Voices, SRHR & Digital Health for Global Change.",
+                heroDesc: "I am a final-year Spanish Major and French Minor at the University of Ghana, a Kufuor Scholar, online language tutor, and dedicated SRHR advocate. Bringing nearly a decade of national, regional, and global experience, I work at the intersection of youth empowerment, digital health mapping, and international development.",
+                btnTouch: "Collaborate With Me", btnFlagship: "Explore Flagship Project",
+                mvMissionTitle: "My Mission", mvMissionDesc: "To utilize multilingual communication, visual advocacy, and human-centered design to ensure language and socio-economic barriers never prevent youth from accessing SRHR and digital health resources.",
+                mvVisionTitle: "My Vision", mvVisionDesc: "A global landscape where youth across Africa and Ibero-America actively shape international development policies, diplomatic frameworks, and healthcare access.",
+                mvValuesTitle: "Core Values", mvValuesDesc: "Youth Leadership, Inclusivity & Diversity, Grassroots Integrity, Multilingual Diplomacy, and Data-Driven Advocacy.",
+                advTag: "Impact & Experience", advTitle: "Advocacy Journey: National & Global Engagements",
+                advDesc: "Nearly a decade collaborating with leading international development organizations, multilateral bodies, and local communities.",
+                footerSubtitle: "International Relations, Youth SRHR Advocacy & Diplomacy Portfolio"
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
-                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-                }
+            es: {
+                navAbout: "Acerca de", navAdvocacy: "Incidencia e Impacto", navFlagship: "#16days4amilliongirls",
+                navLang: "Lingüística y Aspiraciones", navCert: "Honores y Certificados", navContact: "Contacto",
+                heroTag: "Defensora de la Juventud y SDSR en Ghana | Especialista Multilingüe",
+                heroTitle: "Defendiendo las Voces Juveniles, los SDSR y la Salud Digital para el Cambio Global.",
+                heroDesc: "Soy estudiante de último año de Licenciatura en Español y Minor en Francés en la Universidad de Ghana, becaria Kufuor, tutora de idiomas y defensora de los SDSR. Con casi una década de experiencia nacional y global, trabajo en la intersección del empoderamiento juvenil y el desarrollo internacional.",
+                btnTouch: "Colabora Conmigo", btnFlagship: "Explorar Proyecto Principal",
+                mvMissionTitle: "Mi Misión", mvMissionDesc: "Utilizar la comunicación multilingüe y la incidencia visual para garantizar que las barreras lingüísticas nunca impidan el acceso de los jóvenes a los SDSR.",
+                mvVisionTitle: "Mi Visión", mvVisionDesc: "Un panorama global donde los jóvenes de África e Iberoamérica configuren activamente las políticas de desarrollo internacional y marcos diplomáticos.",
+                mvValuesTitle: "Valores Fundamentales", mvValuesDesc: "Liderazgo Juvenil, Inclusión y Diversidad, Integridad Comunitaria, Diplomacia Multilingüe e Incidencia Basada en Datos.",
+                advTag: "Impacto y Experiencia", advTitle: "Trayectoria de Incidencia: Compromisos Nacionales y Globales",
+                advDesc: "Casi una década colaborando con organizaciones internacionales de desarrollo y comunidades locales.",
+                footerSubtitle: "Portafolio de Relaciones Internacionales, Incidencia Juvenil y Diplomacia"
+            },
+            fr: {
+                navAbout: "À propos", navAdvocacy: "Action et Impact", navFlagship: "#16days4amilliongirls",
+                navLang: "Linguistique et Ambitions", navCert: "Honneurs et Certificats", navContact: "Contact",
+                heroTag: "Plaidoyer Jeunesse et SDSR au Ghana | Spécialiste Multilingue",
+                heroTitle: "Promouvoir la Voix des Jeunes, les SDSR et la Santé Numérique pour le Changement Global.",
+                heroDesc: "Étudiante en dernière année de licence d'espagnol et mineure en français à l'Université du Ghana, boursière Kufuor, tutrice de langues et militante des SDSR. Fort d'une expérience de près d'une décennie aux niveaux national et mondial.",
+                btnTouch: "Collaborer avec Moi", btnFlagship: "Découvrir le Projet Phare",
+                mvMissionTitle: "Ma Mission", mvMissionDesc: "Utiliser la communication multilingue et le plaidoyer visuel pour éliminer les barrières linguistiques et socio-économiques des jeunes.",
+                mvVisionTitle: "Ma Vision", mvVisionDesc: "Un paysage mondial où les jeunes d'Afrique et d'Ibéro-Amérique façonnent activement les politiques de développement international.",
+                mvValuesTitle: "Valeurs Fondamentales", mvValuesDesc: "Leadership des Jeunes, Inclusion et Diversité, Intégrité Communautaire, Diplomatie Multilingue.",
+                advTag: "Impact et Expérience", advTitle: "Parcours de Plaidoyer: Engagements Nationaux et Mondiaux",
+                advDesc: "Près d'une décennie de collaboration avec des organisations internationales de développement et des communautés locales.",
+                footerSubtitle: "Portfolio de Relations Internationales, Plaidoyer Jeunesse et Diplomatie"
             }
-        });
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('nav-about').innerText = t.navAbout;
+            document.getElementById('nav-advocacy').innerText = t.navAdvocacy;
+            document.getElementById('nav-flagship').innerText = t.navFlagship;
+            document.getElementById('nav-lang').innerText = t.navLang;
+            document.getElementById('nav-cert').innerText = t.navCert;
+            document.getElementById('nav-contact').innerText = t.navContact;
+            document.getElementById('hero-tag').innerText = t.heroTag;
+            document.getElementById('hero-title').innerText = t.heroTitle;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('btn-touch').innerText = t.btnTouch;
+            document.getElementById('btn-flagship').innerText = t.btnFlagship;
+            document.getElementById('mv-mission-title').innerText = t.mvMissionTitle;
+            document.getElementById('mv-mission-desc').innerText = t.mvMissionDesc;
+            document.getElementById('mv-vision-title').innerText = t.mvVisionTitle;
+            document.getElementById('mv-vision-desc').innerText = t.mvVisionDesc;
+            document.getElementById('mv-values-title').innerText = t.mvValuesTitle;
+            document.getElementById('mv-values-desc').innerText = t.mvValuesDesc;
+            document.getElementById('adv-tag').innerText = t.advTag;
+            document.getElementById('adv-title').innerText = t.advTitle;
+            document.getElementById('adv-desc').innerText = t.advDesc;
+            document.getElementById('footer-subtitle').innerText = t.footerSubtitle;
+
+            ['en', 'es', 'fr'].forEach(l => {
+                const btn = document.getElementById(`btn-${l}`);
+                if (l === lang) {
+                    btn.className = "px-2.5 py-1 rounded bg-sky-500 text-slate-950 font-bold transition";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded text-slate-400 hover:text-white transition";
+                }
+            });
+        }
     </script>
 </body>
 </html>
