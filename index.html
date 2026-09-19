@@ -1,3 +1,13 @@
+Here is the corrected and fully cleaned HTML code.
+
+### Key Issues Fixed
+
+* **Missing French Heading:** Added the missing `<h1 class="lang-text lang-fr">` element in the hero section.
+* **Grammar & Spanish Corrections:** Fixed Spanish/French mix-ups (e.g., corrected `L'space` to Spanish `El espacio...` and created proper French/Spanish translations for headings).
+* **Syntax Artifacts:** Removed leftover text citation markers like `[cite: 1]` from body paragraphs.
+* **HTML Validation:** Added `rel="noopener"` to external social media links targeting `_blank` for web security best practices.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -558,13 +568,14 @@
             <span class="hero-title-badge">Youth & SRHR Advocacy Leader</span>
             
             <!-- Multilingual Headings -->
-            <h1 class="lang-text lang-en">The Space that tells her STORY better!.</h1>
-            <h1 class="lang-text lang-es" style="display: none;">L'space qui raconte mieux son histoire.</h1>
+            <h1 class="lang-text lang-en">The space that tells her STORY better!</h1>
+            <h1 class="lang-text lang-es" style="display: none;">¡El espacio que cuenta mejor su HISTORIA!</h1>
+            <h1 class="lang-text lang-fr" style="display: none;">L'espace qui raconte mieux son HISTOIRE!</h1>
 
             <!-- Multilingual Taglines -->
-            <p class="tagline lang-text lang-en">I am a multilingual advocate, student researcher, and Data Science-enthusiast driving impactful youth development across Ghana, Africa, and beyond.</p>
-            <p class="tagline lang-text lang-es" style="display: none;">Soy una defensora multilingüe, estudiante investigadora y entusiasta de la tecnología que impulsa el desarrollo juvenil impactante en Ghana, África y más allá.</p>
-            <p class="tagline lang-text lang-fr" style="display: none;">Je suis une défenseure multilingue, étudiante chercheuse et passionnée de technologie promouvant le développement de la jeunesse en Ghana, en Afrique et au-delà.</p>
+            <p class="tagline lang-text lang-en">I am a multilingual advocate, student researcher, and Data Science enthusiast driving impactful youth development across Ghana, Africa, and beyond.</p>
+            <p class="tagline lang-text lang-es" style="display: none;">Soy una defensora multilingüe, estudiante investigadora y entusiasta de la ciencia de datos que impulsa el desarrollo juvenil impactante en Ghana, África y más allá.</p>
+            <p class="tagline lang-text lang-fr" style="display: none;">Je suis une défenseure multilingue, étudiante chercheuse et passionnée de science des données promouvant le développement de la jeunesse au Ghana, en Afrique et au-delà.</p>
 
             <!-- Multilingual Quotes -->
             <div class="quote-box">
@@ -576,7 +587,6 @@
         </div>
 
         <div class="hero-image-wrapper">
-            <!-- Replace '1001928433.jpg' with your photo's exact filename if needed -->
             <img src="1001928433.jpg" alt="Magdalene Dorto" class="hero-img">
             <div class="tech-badge">
                 <i class="fa-solid fa-code"></i> Hand-Coded Web Design & AI Enthusiast
@@ -630,7 +640,7 @@
                 <div class="timeline-content">
                     <span class="timeline-year">Global Fellowships & Advocacy</span>
                     <h3 class="timeline-title">National & International Impact</h3>
-                    <p>Served on the Governing Council of PPAG (2022–2025) and as YAM National Treasurer[cite: 1]. Represented Ghana as an IPPF Global Youth Connect Fellow[cite: 1], Oxfam Power to Choose Youth Forum member[cite: 1], SheDecides Regional Organizer[cite: 1], and Kufuor Scholar[cite: 1].</p>
+                    <p>Served on the Governing Council of PPAG (2022–2025) and as YAM National Treasurer. Represented Ghana as an IPPF Global Youth Connect Fellow, Oxfam Power to Choose Youth Forum member, SheDecides Regional Organizer, and Kufuor Scholar.</p>
                 </div>
             </div>
 
@@ -639,7 +649,7 @@
                 <div class="timeline-content">
                     <span class="timeline-year">Present & Beyond</span>
                     <h3 class="timeline-title">Multilingual Mastery & Tech Integration</h3>
-                    <p>Achieved advanced proficiency in Spanish alongside French and native English[cite: 1]. Designed this website myself while actively integrating AI and Data Science into youth health mapping, digital citizenship, and international development research.</p>
+                    <p>Achieved advanced proficiency in Spanish alongside French and native English. Designed this website myself while actively integrating AI and Data Science into youth health mapping, digital citizenship, and international development research.</p>
                 </div>
             </div>
         </div>
@@ -734,9 +744,9 @@
         <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem;">Accra, Ghana | Multilingual Youth & SRHR Advocacy Leader</p>
         
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/magdalene-dorto-b5a424282" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/magdalene-dorto-b5a424282" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
             <a href="mailto:dortomagdalene16@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://facebook.com/MagdaleneDorto" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://facebook.com/MagdaleneDorto" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
         </div>
         <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2026 Magdalene Dorto. All Rights Reserved.</p>
     </footer>
@@ -764,3 +774,5 @@
 
 </body>
 </html>
+
+```
