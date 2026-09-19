@@ -1,24 +1,15 @@
-Here is the corrected and fully cleaned HTML code.
-
-### Key Issues Fixed
-
-* **Missing French Heading:** Added the missing `<h1 class="lang-text lang-fr">` element in the hero section.
-* **Grammar & Spanish Corrections:** Fixed Spanish/French mix-ups (e.g., corrected `L'space` to Spanish `El espacio...` and created proper French/Spanish translations for headings).
-* **Syntax Artifacts:** Removed leftover text citation markers like `[cite: 1]` from body paragraphs.
-* **HTML Validation:** Added `rel="noopener"` to external social media links targeting `_blank` for web security best practices.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magdalene Dorto | Multilingual Youth and SRHR Advocacy Leader</title>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             --primary-blue: #1e3a8a;
@@ -56,7 +47,6 @@ Here is the corrected and fully cleaned HTML code.
             color: inherit;
         }
 
-        /* HEADER & NAVBAR */
         header {
             position: fixed;
             top: 0;
@@ -145,7 +135,6 @@ Here is the corrected and fully cleaned HTML code.
             transform: translateY(-2px);
         }
 
-        /* HERO SECTION */
         .hero {
             padding: 9rem 2rem 5rem 2rem;
             max-width: 1200px;
@@ -245,7 +234,6 @@ Here is the corrected and fully cleaned HTML code.
             color: var(--accent-pink);
         }
 
-        /* SECTION STYLING */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -268,7 +256,6 @@ Here is the corrected and fully cleaned HTML code.
             font-weight: 600;
         }
 
-        /* SPOTLIGHT BANNER */
         .spotlight-card {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
@@ -300,7 +287,6 @@ Here is the corrected and fully cleaned HTML code.
             line-height: 1.3;
         }
 
-        /* CHRONOLOGICAL TIMELINE */
         .timeline {
             position: relative;
             max-width: 900px;
@@ -372,7 +358,6 @@ Here is the corrected and fully cleaned HTML code.
             margin-bottom: 0.8rem;
         }
 
-        /* CORE VALUES: ATTIREE */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -405,7 +390,6 @@ Here is the corrected and fully cleaned HTML code.
             margin-bottom: 0.5rem;
         }
 
-        /* CAREER & HOBBIES GRID */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -444,7 +428,6 @@ Here is the corrected and fully cleaned HTML code.
             font-size: 0.9rem;
         }
 
-        /* SUPPORT & DONATIONS */
         .support-section {
             background: linear-gradient(135deg, #fff7ed 0%, #fef2f2 100%);
             border-radius: 24px;
@@ -485,7 +468,6 @@ Here is the corrected and fully cleaned HTML code.
             font-weight: 700;
         }
 
-        /* FOOTER */
         footer {
             background: var(--primary-blue);
             color: white;
@@ -512,7 +494,6 @@ Here is the corrected and fully cleaned HTML code.
             opacity: 1;
         }
 
-        /* RESPONSIVE DESIGN */
         @media (max-width: 900px) {
             .hero, .spotlight-card, .info-grid {
                 grid-template-columns: 1fr;
@@ -540,11 +521,10 @@ Here is the corrected and fully cleaned HTML code.
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <header>
         <div class="nav-container">
             <div class="logo">
-                Magdalene Dorto 
+                Magdalene Dorto
                 <div class="flag-icons">
                     <button class="flag-btn active" onclick="switchLanguage('en', event)" title="English">🇬🇧</button>
                     <button class="flag-btn" onclick="switchLanguage('es', event)" title="Español">🇪🇸</button>
@@ -562,26 +542,22 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="about">
         <div>
             <span class="hero-title-badge">Youth & SRHR Advocacy Leader</span>
-            
-            <!-- Multilingual Headings -->
-            <h1 class="lang-text lang-en">The space that tells her STORY better!</h1>
-            <h1 class="lang-text lang-es" style="display: none;">¡El espacio que cuenta mejor su HISTORIA!</h1>
-            <h1 class="lang-text lang-fr" style="display: none;">L'espace qui raconte mieux son HISTOIRE!</h1>
 
-            <!-- Multilingual Taglines -->
-            <p class="tagline lang-text lang-en">I am a multilingual advocate, student researcher, and Data Science enthusiast driving impactful youth development across Ghana, Africa, and beyond.</p>
-            <p class="tagline lang-text lang-es" style="display: none;">Soy una defensora multilingüe, estudiante investigadora y entusiasta de la ciencia de datos que impulsa el desarrollo juvenil impactante en Ghana, África y más allá.</p>
-            <p class="tagline lang-text lang-fr" style="display: none;">Je suis une défenseure multilingue, étudiante chercheuse et passionnée de science des données promouvant le développement de la jeunesse au Ghana, en Afrique et au-delà.</p>
+            <h1 class="lang-text lang-en">The space that tells her story best.</h1>
+            <h1 class="lang-text lang-es" style="display: none;">El espacio que cuenta mejor su historia.</h1>
+            <h1 class="lang-text lang-fr" style="display: none;">L'espace qui raconte le mieux son histoire.</h1>
 
-            <!-- Multilingual Quotes -->
+            <p class="tagline lang-text lang-en">I am a multilingual advocate, student researcher, and data science enthusiast driving impactful youth development across Ghana, Africa, and beyond.</p>
+            <p class="tagline lang-text lang-es" style="display: none;">Soy una defensora multilingüe, estudiante investigadora y entusiasta de la ciencia de datos que impulsa un desarrollo juvenil impactante en Ghana, África y más allá.</p>
+            <p class="tagline lang-text lang-fr" style="display: none;">Je suis une défenseure multilingue, étudiante chercheuse et passionnée de la science des données, qui promeut un développement jeunesse fort et durable au Ghana, en Afrique et au-delà.</p>
+
             <div class="quote-box">
-                <p class="lang-text lang-en">"As part of my mission in life, I am enthusiastic about youth development work because once upon a time, the system worked in my favor as a minor from a vulnerable group. Knowing what could have gone wrong had I not been supported, I am forever committed to empowering the next generation of youth—and language will never be a barrier."</p>
-                <p class="lang-text lang-es" style="display: none;">"Como parte de mi misión de vida, me entusiasma el trabajo de desarrollo juvenil porque, en su momento, el sistema funcionó a mi favor siendo una menor de un grupo vulnerable. Sabiendo lo que podría haber salido mal si no hubiera recibido apoyo, estoy para siempre comprometida a empoderar a la próxima generación de jóvenes, y el idioma nunca será una barrera."</p>
-                <p class="lang-text lang-fr" style="display: none;">"Dans le cadre de ma mission de vie, je suis passionnée par le développement de la jeunesse car, autrefois, le système a fonctionné en ma faveur en tant que mineure issue d'un groupe vulnérable. Sachant ce qui aurait pu mal tourner si je n'avais pas été soutenue, je m'engage pour toujours à autonomiser la prochaine génération de jeunes—et la langue ne sera jamais un obstacle."</p>
+                <p class="lang-text lang-en">"As part of my life mission, I am passionate about youth development work because once, the system worked in my favor as a minor from a vulnerable group. Knowing what could have happened had I not been supported, I am committed to empowering the next generation of youth—and language will never be a barrier."</p>
+                <p class="lang-text lang-es" style="display: none;">"Como parte de mi misión de vida, me entusiasma el trabajo de desarrollo juvenil porque, en su momento, el sistema funcionó a mi favor siendo una menor de un grupo vulnerable. Sabiendo lo que podría haber ocurrido si no hubiera recibido apoyo, estoy comprometida a empoderar a la próxima generación de jóvenes, y el idioma nunca será una barrera."</p>
+                <p class="lang-text lang-fr" style="display: none;">"Dans le cadre de ma mission de vie, je suis passionnée par le développement de la jeunesse, car le système a autrefois joué en ma faveur en tant que mineure issue d'un groupe vulnérable. Sachant ce qui aurait pu se produire si je n'avais pas été soutenue, je m'engage à autonomiser la prochaine génération de jeunes, et la langue ne sera jamais un obstacle."</p>
                 <span class="quote-author">— Magdalene Dorto</span>
             </div>
         </div>
@@ -594,7 +570,6 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </section>
 
-    <!-- SPOTLIGHT SECTION -->
     <section id="spotlight">
         <div class="spotlight-card">
             <div>
@@ -609,7 +584,6 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </section>
 
-    <!-- CHRONOLOGICAL JOURNEY -->
     <section id="journey">
         <div class="section-title">
             <h2>My Chronological Journey</h2>
@@ -617,7 +591,6 @@ Here is the corrected and fully cleaned HTML code.
         </div>
 
         <div class="timeline">
-            <!-- Node 1 -->
             <div class="timeline-container left">
                 <div class="timeline-content">
                     <span class="timeline-year">Early Foundations</span>
@@ -626,16 +599,14 @@ Here is the corrected and fully cleaned HTML code.
                 </div>
             </div>
 
-            <!-- Node 2 -->
             <div class="timeline-container right">
                 <div class="timeline-content">
                     <span class="timeline-year">Grassroots Leadership</span>
                     <h3 class="timeline-title">YAM Branch Chair & Champion Spelling Bee</h3>
-                    <p>While in JHS, I assumed the role of Branch Chair for the Youth Action Movement (YAM) of PPAG—a position I held for 6 years across 2 terms, leading both self-sponsored and grant-funded community initiatives. During this time, I also emerged as the overall district winner of the Nneka Youth Foundation Inter-District Spelling Bee for North Tongu.</p>
+                    <p>While in JHS, I assumed the role of Branch Chair for the Youth Action Movement (YAM) of PPAG, a position I held for six years across two terms, leading both self-sponsored and grant-funded community initiatives. During this time, I also emerged as the overall district winner of the Nneka Youth Foundation Inter-District Spelling Bee for North Tongu.</p>
                 </div>
             </div>
 
-            <!-- Node 3 -->
             <div class="timeline-container left">
                 <div class="timeline-content">
                     <span class="timeline-year">Global Fellowships & Advocacy</span>
@@ -644,18 +615,16 @@ Here is the corrected and fully cleaned HTML code.
                 </div>
             </div>
 
-            <!-- Node 4 -->
             <div class="timeline-container right">
                 <div class="timeline-content">
                     <span class="timeline-year">Present & Beyond</span>
                     <h3 class="timeline-title">Multilingual Mastery & Tech Integration</h3>
-                    <p>Achieved advanced proficiency in Spanish alongside French and native English. Designed this website myself while actively integrating AI and Data Science into youth health mapping, digital citizenship, and international development research.</p>
+                    <p>Achieved advanced proficiency in Spanish alongside French and native English. Designed this website myself while actively integrating AI and data science into youth health mapping, digital citizenship, and international development research.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- VALUES: ATTIREE -->
     <section id="values">
         <div class="section-title">
             <h2>Grounded in ATTIREE</h2>
@@ -701,12 +670,11 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </section>
 
-    <!-- CAREER ASPIRATIONS & HOBBIES -->
     <section id="aspirations">
         <div class="info-grid">
             <div class="info-card">
                 <h3><i class="fa-solid fa-earth-americas" style="color: var(--secondary-blue);"></i> Career Aspirations</h3>
-                <p>Targeting postgraduate opportunities and Master's studies in <strong>International Relations, International Development, and Diplomacy</strong> across Latin America and globally.</p>
+                <p>Targeting postgraduate opportunities and master's studies in <strong>International Relations, International Development, and Diplomacy</strong> across Latin America and globally.</p>
                 <p style="margin-top: 1rem;">Committed to leveraging advanced Spanish language mastery, digital health mapping, and youth governance experience to influence global policy and cross-border cooperation.</p>
             </div>
 
@@ -725,12 +693,11 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </section>
 
-    <!-- SUPPORT & DONATIONS -->
     <section id="contact">
         <div class="support-section">
             <h2>Support the Flagship Initiative</h2>
             <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">Direct support and donations go specifically toward funding our flagship community outreach and mural advocacy projects. Additionally, I am always open to voluntarily lending my expertise in youth consulting, SRHR, and project facilitation to mission-driven organizations.</p>
-            
+
             <div class="btn-group">
                 <a href="mailto:dortomagdalene16@gmail.com" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> Support Flagship Project</a>
                 <a href="mailto:dortomagdalene16@gmail.com" class="btn-secondary"><i class="fa-solid fa-envelope"></i> Request Voluntary Expertise</a>
@@ -738,41 +705,35 @@ Here is the corrected and fully cleaned HTML code.
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <p>Designed with passion & code by <strong>Magdalene Dorto</strong></p>
         <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem;">Accra, Ghana | Multilingual Youth & SRHR Advocacy Leader</p>
-        
+
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/magdalene-dorto-b5a424282" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/magdalene-dorto-b5a424282" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             <a href="mailto:dortomagdalene16@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://facebook.com/MagdaleneDorto" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://facebook.com/MagdaleneDorto" target="_blank"><i class="fa-brands fa-facebook"></i></a>
         </div>
         <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2026 Magdalene Dorto. All Rights Reserved.</p>
     </footer>
 
-    <!-- INTERACTIVE SCRIPT -->
     <script>
         function switchLanguage(lang, event) {
-            // Hide all language text elements
             document.querySelectorAll('.lang-text').forEach(el => {
                 el.style.display = 'none';
             });
 
-            // Show selected language elements
             document.querySelectorAll('.lang-' + lang).forEach(el => {
                 el.style.display = 'block';
             });
 
-            // Update active state on flag buttons
             document.querySelectorAll('.flag-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
+
             event.currentTarget.classList.add('active');
         }
     </script>
 
 </body>
 </html>
-
-```
