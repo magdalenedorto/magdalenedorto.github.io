@@ -10,19 +10,24 @@
  }
 
 
- .slide-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
-.slide {
-  height: 100vh;
-  width: 100%;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ .slide {
+  height: 100vh;               /* Forces every slide to be exactly full screen */
+  width: 100%;                 /* Full width */
+  scroll-snap-align: start;    /* Snaps the slide to the top of the window */
+  box-sizing: border-box;      /* Prevents padding from breaking full-screen height */
+  position: relative;          /* Keeps original element spacing intact */
 }
