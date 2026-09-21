@@ -31,6 +31,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
         }
 
         body {
@@ -340,6 +341,15 @@
             padding: 4.5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .slide-container {
+            scroll-snap-type: y mandatory;
+        }
+
+        .slide {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
 
         .section-title {
