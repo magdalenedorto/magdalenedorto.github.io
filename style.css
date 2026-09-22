@@ -24,18 +24,143 @@
  
  
  
- .slide {
-  min-height: 100vh;           /* Grows if your content is tall */
-  width: 100%;                 /* Full screen width */
-  scroll-snap-align: start;    /* Keeps full-page scroll snapping functional */
-  box-sizing: border-box;      
-  position: relative;          
-  padding: 80px 20px;          /* Adds extra vertical space to separate content */
-  
-  /* Enforces absolute separation between internal texts and images */
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-  gap: 20px !important;        /* Guarantees elements cannot merge together */
+ /* ==========================================
+   1. MODERN PALETTE & DESIGN VARIABLES
+   ========================================== */
+:root {
+  --bg-main: #f8fafc;         /* Clean, soft off-white background */
+  --surface-card: #ffffff;    /* Pure crisp white for cards */
+  --text-primary: #0f172a;    /* Premium deep slate black for headings */
+  --text-secondary: #475569;  /* Muted slate gray for secondary body text */
+  --accent-color: #2563eb;    /* Intelligent electric blue for active indicators */
+  --accent-hover: #1d4ed8;    
+  --border-subtle: #e2e8f0;   /* Ultra-thin elegant layout borders */
+  --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+}
+
+/* Base Body Adjustments */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   2. MODERN TAB / TOGGLE MENU DESIGN
+   ========================================== */
+.nav-wrapper {
+  max-width: 600px;
+  margin: 40px auto 20px auto;
+  padding: 0 20px;
+}
+
+.menu {
+  display: flex;
+  background-color: rgba(226, 232, 240, 0.6); /* Translucent background */
+  backdrop-filter: blur(8px);                 /* Modern glassmorphism blur effect */
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  gap: 4px;
+}
+
+.menu-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Active Menu Button Styling */
+.menu-btn.active {
+  background-color: var(--surface-card);
+  color: var(--accent-color);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================
+   3. SCREEN CONTAINMENT (ONE AT A TIME)
+   ========================================== */
+.page-container {
+  max-width: 1100px; /* Prevents text and galleries from stretching too wide */
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+
+.page-section {
+  display: none; /* Hides pages completely by default */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Reveal active section with a smooth transition layout */
+.page-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================
+   4. PREMIUM RESPONSE GALLERY GRID
+   ========================================== */
+.gallery-grid {
+  display: grid;
+  /* Enforces smart dynamic wrapping columns. Cards never grow wider than 340px */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+  justify-content: center; /* Centers the whole gallery grid layout inside the container */
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.gallery-card {
+  background-color: var(--surface-card);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px); /* Elegant float animation up on hover */
+  box-shadow: var(--shadow-lg);
+}
+
+/* CONSTRAINS IMAGES SO THEY NEVER GROW OVERSIZED */
+.gallery-card img {
+  width: 100%;
+  height: 260px;          /* Locked aspect ratio height to prevent exploding sizes */
+  object-fit: cover;      /* Crops perfectly clean without warping image distortion */
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.gallery-info {
+  padding: 16px;
+}
+
+.gallery-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
