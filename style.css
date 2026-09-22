@@ -25,9 +25,17 @@
  
  
  .slide {
-  height: 100vh;               /* Forces every slide to be exactly full screen */
-  width: 100%;                 /* Full width */
-  scroll-snap-align: start;    /* Snaps the slide to the top of the window */
-  box-sizing: border-box;      /* Prevents padding from breaking full-screen height */
-  position: relative;          /* Keeps original element spacing intact */
+  min-height: 100vh;           /* Grows if your content is tall */
+  width: 100%;                 /* Full screen width */
+  scroll-snap-align: start;    /* Keeps full-page scroll snapping functional */
+  box-sizing: border-box;      
+  position: relative;          
+  padding: 80px 20px;          /* Adds extra vertical space to separate content */
+  
+  /* Enforces absolute separation between internal texts and images */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 20px !important;        /* Guarantees elements cannot merge together */
 }
