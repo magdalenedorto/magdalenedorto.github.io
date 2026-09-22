@@ -1,166 +1,249 @@
- .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
- }
-
- .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
- }
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- /* ==========================================
-   1. MODERN PALETTE & DESIGN VARIABLES
-   ========================================== */
+/* ==========================================================================
+   1. PREMIUM EXECUTIVE PALETTE & HYBRID THEME VARIABLES (Slate & Earth Tones)
+   ========================================================================== */
 :root {
-  --bg-main: #f8fafc;         /* Clean, soft off-white background */
-  --surface-card: #ffffff;    /* Pure crisp white for cards */
-  --text-primary: #0f172a;    /* Premium deep slate black for headings */
-  --text-secondary: #475569;  /* Muted slate gray for secondary body text */
-  --accent-color: #2563eb;    /* Intelligent electric blue for active indicators */
-  --accent-hover: #1d4ed8;    
-  --border-subtle: #e2e8f0;   /* Ultra-thin elegant layout borders */
-  --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  /* Premium Slate, Stone, and Earthy Accents */
+  --bg-main: #f1f5f9;           /* Sophisticated light slate background */
+  --bg-surface: #ffffff;        /* Pure white crisp container surface */
+  --text-main: #1e293b;         /* Sharp deep charcoal slate for readable body text */
+  --text-heading: #0f172a;      /* Bold obsidian black for clean structural headings */
+  --text-muted: #64748b;        /* Velvet stone gray for secondary elements */
+  --accent-earth: #b45309;      /* Rich polished amber/earth tone for links and badges */
+  --accent-glow: rgba(180, 83, 9, 0.15);
+  --border-subtle: rgba(226, 232, 240, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  
+  /* Layout Shadows */
+  --shadow-editorial: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 8px -1px rgba(15, 23, 42, 0.02);
+  --shadow-premium: 0 20px 40px -5px rgba(15, 23, 42, 0.06);
 }
 
-/* Base Body Adjustments */
+/* 🌙 AUTOMATIC DARK THEME OVERRIDE */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #0b0f19;          /* Premium obsidian/midnight deep sky foundation */
+    --bg-surface: #131c2e;       /* Velvet slate dark card background */
+    --text-main: #94a3b8;        /* Light slate for readable text in dark mode */
+    --text-heading: #f8fafc;     /* Ice white for sharp high-contrast headings */
+    --text-muted: #64748b;
+    --accent-earth: #f59e0b;     /* Vivid glowing gold amber accent for dark viewports */
+    --accent-glow: rgba(245, 158, 11, 0.2);
+    --border-subtle: rgba(30, 41, 59, 0.7);
+    --glass-bg: rgba(19, 28, 46, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ==========================================================================
+   2. SHARPER EDITORIAL TYPOGRAPHY & INTERACTIVE HIGHLIGHTS
+   ========================================================================== */
+html {
+  font-size: 15px; /* Downscaled slightly globally for a sharper modern footprint */
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--bg-main);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ==========================================
-   2. MODERN TAB / TOGGLE MENU DESIGN
-   ========================================== */
-.nav-wrapper {
-  max-width: 600px;
-  margin: 40px auto 20px auto;
+/* Subtle visual highlight rule indicating individual words can be clicked for inline translation */
+p, h1, h2, h3, li, span {
+  cursor: default;
+}
+p::selection, h1::selection, h2::selection, span::selection {
+  background: var(--accent-glow);
+  color: var(--text-heading);
+}
+
+/* Target individual elements inside sections for hover translation hints */
+.translatable-word:hover {
+  background-color: var(--accent-glow);
+  color: var(--accent-earth);
+  border-radius: 4px;
+  cursor: help;
+}
+
+h1, h2, h3 {
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+h1 { font-size: 2.1rem; }
+h2 { font-size: 1.55rem; margin-bottom: 12px; }
+h3 { font-size: 1.15rem; }
+
+/* ==========================================================================
+   3. GEOMETRIC PROFILE AVATAR & OVERLAPPING BADGE SYSTEM
+   ========================================================================== */
+.profile-wrapper {
+  text-align: center;
+  padding: 60px 20px 20px 20px;
+}
+
+.avatar-containment {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 24px; /* Clean geometric container box profile instead of a basic circle */
+  border: 3px solid var(--bg-surface);
+  box-shadow: var(--shadow-premium);
+  background-color: var(--bg-surface);
+}
+
+/* Absolute positioned "AI & Data Enthusiast" badge overlapping the geometric border */
+.badge-tag-overlay {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-heading);
+  color: var(--bg-surface);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: 30px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   4. ULTRA-SLEEK TRANSLUCENT PILL MENU (Glassmorphism Styling)
+   ========================================================================== */
+.menu-nav-container {
+  max-width: 480px;
+  margin: 20px auto;
   padding: 0 20px;
 }
 
-.menu {
+.translucent-pill-menu {
   display: flex;
-  background-color: rgba(226, 232, 240, 0.6); /* Translucent background */
-  backdrop-filter: blur(8px);                 /* Modern glassmorphism blur effect */
-  padding: 6px;
-  border-radius: 16px;
-  border: 1px solid var(--border-subtle);
-  gap: 4px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px); /* Glassmorphic layout structure blur */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  padding: 4px;
+  border-radius: 100px; /* Forces a perfect pill shape wrapper */
+  gap: 2px;
+  box-shadow: var(--shadow-editorial);
 }
 
 .menu-btn {
   flex: 1;
   background: transparent;
   border: none;
-  padding: 12px 24px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
   cursor: pointer;
-  border-radius: 12px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 100px;
+  transition: all 0.2s ease;
 }
 
 .menu-btn:hover {
-  color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--text-heading);
 }
 
-/* Active Menu Button Styling */
+/* Active Navigation Selection Tab Highlight */
 .menu-btn.active {
-  background-color: var(--surface-card);
-  color: var(--accent-color);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--bg-surface);
+  color: var(--accent-earth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* ==========================================
-   3. SCREEN CONTAINMENT (ONE AT A TIME)
-   ========================================== */
+/* ==========================================================================
+   5. SCREEN CONTAINMENT & CONSTRAINED AUTO-GRIDPING GALLERY
+   ========================================================================== */
 .page-container {
-  max-width: 1100px; /* Prevents text and galleries from stretching too wide */
-  margin: 0 auto 60px auto;
-  padding: 0 20px;
+  max-width: 1000px; /* Keeps layout crisp and editorial instead of stretched out */
+  margin: 0 auto 80px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .page-section {
-  display: none; /* Hides pages completely by default */
+  display: none; /* One page layout view active toggling */
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Reveal active section with a smooth transition layout */
 .page-section.active {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ==========================================
-   4. PREMIUM RESPONSE GALLERY GRID
-   ========================================== */
+/* Clean Professional Editorial Display Card Boxes */
+.premium-card {
+  background-color: var(--bg-surface);
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-editorial);
+}
+
+/* Anti-Explode Contained Gallery Grid Design */
 .gallery-grid {
   display: grid;
-  /* Enforces smart dynamic wrapping columns. Cards never grow wider than 340px */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
-  justify-content: center; /* Centers the whole gallery grid layout inside the container */
-  gap: 24px;
-  padding: 24px 0;
+  /* Auto wrapping fluid structure prevents images from bloating across mobile layouts */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+  width: 100%;
 }
 
 .gallery-card {
-  background-color: var(--surface-card);
-  border-radius: 20px;
+  background-color: var(--bg-surface);
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 .gallery-card:hover {
-  transform: translateY(-6px); /* Elegant float animation up on hover */
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-premium);
 }
 
-/* CONSTRAINS IMAGES SO THEY NEVER GROW OVERSIZED */
+/* Strict constraints keep image asset sizing beautifully proportioned */
 .gallery-card img {
   width: 100%;
-  height: 260px;          /* Locked aspect ratio height to prevent exploding sizes */
-  object-fit: cover;      /* Crops perfectly clean without warping image distortion */
+  height: 220px;          /* Hard limit locks dimensions safely */
+  object-fit: cover;      /* Crops crisply without distorting photo ratios */
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.gallery-info {
+.gallery-details {
   padding: 16px;
 }
 
-.gallery-info h3 {
-  margin: 0 0 6px 0;
-  font-size: 1.1rem;
-  color: var(--text-primary);
+.gallery-details h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.05rem;
 }
 
-.gallery-info p {
+.gallery-details p {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
+
