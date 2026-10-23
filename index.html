@@ -10,17 +10,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary-blue: #201e8a;
-            --secondary-blue: #8c0c7bda;
-            --accent-orange: #f97316;
-            --accent-pink: #ec4899;
-            --accent-brown: #db580d;
-            --bg-light: #f5f8fc;
+            --primary-blue: #173b57;
+            --secondary-blue: #2f7898;
+            --accent-orange: #df682e;
+            --accent-pink: #ef9a58;
+            --accent-brown: #b84f24;
+            --bg-light: #f7f9fb;
             --surface-white: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --card-shadow: 0 12px 28px -10px rgba(30, 58, 138, 0.18);
-            --tab-bg: rgba(15, 23, 42, 0.04);
+            --text-main: #21313f;
+            --text-muted: #526574;
+            --card-shadow: 0 12px 28px -10px rgba(23, 59, 87, 0.16);
+            --tab-bg: rgba(23, 59, 87, 0.045);
         }
 
         * {
@@ -37,8 +37,8 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background:
-                radial-gradient(circle at top left, rgba(59, 130, 246, 0.045), transparent 22%),
-                radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.04), transparent 20%),
+                radial-gradient(circle at top left, rgba(47, 120, 152, 0.055), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(223, 104, 46, 0.045), transparent 20%),
                 var(--bg-light);
             color: var(--text-main);
             line-height: 1.7;
@@ -338,7 +338,7 @@
         .hero-title-badge span:nth-child(1) i { color: var(--accent-orange); }
         .hero-title-badge span:nth-child(2) i { color: var(--secondary-blue); }
         .hero-title-badge span:nth-child(3) i { color: var(--accent-pink); }
-        .hero-title-badge span:nth-child(4) i { color: #4f46e5; }
+        .hero-title-badge span:nth-child(4) i { color: var(--secondary-blue); }
 
         .hero h1 {
             font-size: 3.6rem;
@@ -407,7 +407,7 @@
             width: min(100%, 420px);
             padding: 16px;
             border-radius: 32px;
-            background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(236,72,153,0.08));
+            background: linear-gradient(135deg, rgba(47,120,152,0.18), rgba(223,104,46,0.1));
             border: 1px solid rgba(30, 58, 138, 0.15);
             box-shadow: 0 24px 50px rgba(15, 23, 42, 0.18);
             transform: rotate(-2deg);
@@ -444,7 +444,7 @@
         }
 
         .tech-badge i {
-            color: var(--accent-pink);
+            color: var(--accent-orange);
         }
 
         .language-spark {
@@ -491,26 +491,53 @@
         footer[hidden] { display: none !important; }
 
         .mode-choice {
+            position: relative;
+            isolation: isolate;
             display: grid;
-            place-items: center;
-            min-height: min(760px, calc(100svh - 80px));
-            padding: 3rem 1.5rem;
+            align-items: center;
+            justify-items: start;
+            width: 100%;
+            max-width: none;
+            min-height: min(820px, calc(100svh - 72px));
+            overflow: hidden;
+            padding: clamp(2.5rem, 7vh, 5rem) max(1rem, calc((100vw - 1200px) / 2));
+            background: #173b57;
+        }
+
+        .mode-choice::before {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            content: "";
+            background: linear-gradient(90deg, rgba(14, 39, 59, 0.86) 0%, rgba(14, 39, 59, 0.67) 48%, rgba(14, 39, 59, 0.16) 100%), linear-gradient(0deg, rgba(14, 39, 59, 0.45), transparent 58%);
+        }
+
+        .mode-choice-cover {
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 56%;
         }
 
         .mode-choice-inner {
-            width: min(760px, 100%);
-            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: min(780px, 100%);
+            text-align: left;
         }
 
-        .mode-choice .eyebrow { display: inline-block; margin-bottom: 0.8rem; }
-        .mode-choice h1 { margin-bottom: 0.8rem; color: var(--primary-blue); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.12; }
-        .mode-choice-intro { max-width: 580px; margin: 0 auto; color: var(--text-muted); }
+        .mode-choice .eyebrow { display: inline-block; margin-bottom: 0.8rem; color: #ffbd7e; }
+        .mode-choice h1 { max-width: 700px; margin-bottom: 0.8rem; color: #fff; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.1; }
+        .mode-choice-intro { max-width: 580px; color: rgba(255, 255, 255, 0.92); }
 
         .mode-options {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             text-align: left;
         }
 
@@ -518,11 +545,11 @@
             display: grid;
             align-content: start;
             justify-items: start;
-            min-height: 190px;
-            padding: 1.35rem;
-            border: 1px solid rgba(32, 30, 138, 0.15);
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.88);
+            min-height: 155px;
+            padding: 1.2rem;
+            border: 1px solid rgba(223, 104, 46, 0.34);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.96);
             color: var(--text-main);
             box-shadow: var(--card-shadow);
             text-align: left;
@@ -534,7 +561,7 @@
         .mode-option:focus-visible {
             transform: translateY(-3px);
             border-color: var(--accent-orange);
-            box-shadow: 0 18px 34px rgba(30, 58, 138, 0.14);
+            box-shadow: 0 18px 34px rgba(10, 31, 48, 0.28);
             outline: none;
         }
 
@@ -686,20 +713,26 @@
         }
 
         .spotlight-card {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: var(--primary-blue);
             color: white;
-            border-radius: 24px;
-            padding: 3rem;
+            border-radius: 12px;
+            border-bottom: 5px solid var(--accent-orange);
+            padding: 1.2rem;
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2.5rem;
-            align-items: center;
-            box-shadow: 0 20px 30px rgba(30, 58, 138, 0.2);
+            grid-template-columns: minmax(250px, 0.9fr) minmax(0, 1.1fr);
+            gap: 1.5rem;
+            align-items: stretch;
+            box-shadow: 0 18px 38px rgba(23, 59, 87, 0.2);
             margin-bottom: 2.5rem;
         }
 
+        .spotlight-image { min-height: 300px; overflow: hidden; border-radius: 8px; background: #dfe8ed; }
+        .spotlight-image img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; object-position: center 34%; }
+        .spotlight-copy { align-self: center; padding: 1rem 1.25rem 1rem 0; }
+        .spotlight-copy p { color: rgba(255, 255, 255, 0.9); }
+
         .spotlight-tag {
-            background: var(--accent-pink);
+            background: var(--accent-orange);
             color: white;
             padding: 0.35rem 1rem;
             border-radius: 12px;
@@ -723,6 +756,19 @@
             border-radius: 24px;
             padding: 1.2rem;
         }
+
+        .expertise-visual {
+            position: relative;
+            width: min(100%, 1120px);
+            height: clamp(220px, 32vw, 360px);
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #dfe8ed;
+        }
+
+        .expertise-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 56%; }
+        .expertise-visual figcaption { position: absolute; inset: auto 0 0; padding: 3.25rem 1.25rem 1rem; color: #fff; font-weight: 800; background: linear-gradient(transparent, rgba(18, 43, 61, 0.86)); }
 
         .tab-buttons {
             display: flex;
@@ -799,8 +845,8 @@
 
         .icon-blue { background: rgba(59,130,246,0.1); color: var(--secondary-blue); }
         .icon-orange { background: rgba(249,115,22,0.12); color: var(--accent-orange); }
-        .icon-pink { background: rgba(236,72,153,0.12); color: var(--accent-pink); }
-        .icon-violet { background: rgba(79,70,229,0.12); color: #4f46e5; }
+        .icon-pink { background: rgba(223,104,46,0.12); color: var(--accent-orange); }
+        .icon-violet { background: rgba(47,120,152,0.12); color: var(--secondary-blue); }
 
         .expert-card h3 {
             font-size: 1.45rem;
@@ -846,7 +892,7 @@
             content: '';
             position: absolute;
             width: 4px;
-            background: linear-gradient(to bottom, var(--accent-orange), var(--secondary-blue), var(--accent-pink));
+            background: linear-gradient(to bottom, var(--accent-orange), var(--secondary-blue));
             top: 0;
             bottom: 0;
             left: 50%;
@@ -955,8 +1001,8 @@
             grid-template-columns: 0.75fr 1.25fr;
             gap: 2rem;
             align-items: center;
-            background: linear-gradient(135deg, #fff7ed, #fdf2f8 52%, #eff6ff);
-            border: 1px solid rgba(236,72,153,0.16);
+            background: linear-gradient(135deg, #fff7ed, #ffffff 52%, #edf4f8);
+            border: 1px solid rgba(223,104,46,0.18);
             border-radius: 24px;
             padding: 2.5rem;
             box-shadow: var(--card-shadow);
@@ -1081,6 +1127,18 @@
         .origin-card p { color: var(--text-muted); }
         .diplomacy-note { border-left: 4px solid var(--accent-orange); padding-left: 1.2rem; }
 
+        .recognition-poster {
+            width: min(100%, 1040px);
+            margin: 0 auto 1.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(23, 59, 87, 0.14);
+            border-radius: 10px;
+            background: #07533e;
+            box-shadow: var(--card-shadow);
+        }
+
+        .recognition-poster img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1143,9 +1201,31 @@
             max-width: min(100%, 1100px);
             max-height: 88vh;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.35);
         }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            transform: translateY(-50%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 50%;
+            background: rgba(23, 59, 87, 0.86);
+            color: #fff;
+            font: inherit;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .lightbox-nav:hover { background: var(--accent-orange); }
+        .lightbox-previous { left: max(1rem, calc((100vw - 1200px) / 2)); }
+        .lightbox-next { right: max(1rem, calc((100vw - 1200px) / 2)); }
+        .lightbox-status { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); color: #fff; font-size: 0.85rem; font-weight: 700; }
 
         .lightbox-close {
             position: absolute;
@@ -1187,11 +1267,11 @@
         }
 
         .support-section {
-            background: linear-gradient(135deg, #fff7ed 0%, #fef2f2 100%);
+            background: linear-gradient(135deg, #fff7ed 0%, #ffffff 74%);
             border-radius: 24px;
             padding: 3.5rem;
             text-align: center;
-            border: 1px solid rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(223, 104, 46, 0.22);
             margin-top: 2rem;
         }
 
@@ -1476,9 +1556,11 @@
 
             .nav-links { right: 1rem; }
 
-            .mode-choice { min-height: min(720px, calc(100svh - 72px)); padding: 2.5rem 1rem; }
-            .mode-options { grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.5rem; }
-            .mode-option { min-height: 0; padding: 1rem; grid-template-columns: 28px 1fr; column-gap: 0.7rem; }
+            .mode-choice { min-height: min(820px, calc(100svh - 72px)); padding: 2rem 1rem; align-items: end; }
+            .mode-choice::before { background: linear-gradient(180deg, rgba(14, 39, 59, 0.08) 0%, rgba(14, 39, 59, 0.28) 28%, rgba(14, 39, 59, 0.96) 100%); }
+            .mode-choice-cover { object-position: 54% center; }
+            .mode-options { grid-template-columns: 1fr; gap: 0.65rem; margin-top: 1.1rem; }
+            .mode-option { min-height: 0; padding: 0.85rem 1rem; grid-template-columns: 28px 1fr; column-gap: 0.7rem; }
             .mode-option i { grid-row: span 2; margin: 0.15rem 0 0; }
             .mode-option strong { margin: 0; }
             .mode-option span { grid-column: 2; }
@@ -1585,6 +1667,7 @@
     </header>
 
     <main class="mode-choice" id="mode-choice" aria-labelledby="mode-choice-title">
+        <img class="mode-choice-cover" src="images/1000022395%20%281%29.jpg" alt="Youth advocates working together on community priorities at a planning workshop" fetchpriority="high" decoding="async" />
         <div class="mode-choice-inner">
             <span class="eyebrow">Explore Magdalene's work</span>
             <h1 id="mode-choice-title">How would you like to explore?</h1>
@@ -1633,14 +1716,13 @@
 
     <section class="slide" id="spotlight">
         <div class="spotlight-card reveal">
-            <div>
+            <figure class="spotlight-image"><img src="images/1000022383.jpg" alt="Magdalene Dorto attending the Global Youth Connect conference" loading="lazy" decoding="async" /></figure>
+            <div class="spotlight-copy">
                 <span class="spotlight-tag"><i class="fa-solid fa-star"></i> Spotlight Feature</span>
                 <h3>Featured in DTH-LAB Newsletter!</h3>
                 <p>Honored to be spotlighted for my work at the intersection of youth advocacy, digital health, and regional empowerment.</p>
-            </div>
-            <div>
                 <p style="margin-bottom: 1rem;">From co-designing a Digital Global CSE Course for the UNFPA Global Academy to leading the <strong>#16days4amilliongirls</strong> mural advocacy campaign, my journey continues to expand globally.</p>
-                <a href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer" style="color: #f9c98d; font-weight: 700;">Click to watch project documentary here &rarr;</a>
+                <a href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer" style="color: #ffd1a6; font-weight: 700;">Click to watch project documentary here &rarr;</a>
             </div>
         </div>
     </section>
@@ -1651,6 +1733,11 @@
             <p>Technology, language, youth advocacy, and global affairs</p>
             <p class="section-description">Four connected practices shape my work: helping people inhabit a new language, making communication cross-cultural, creating safer opportunities for young people, and turning ideas into coordinated action. Together, they reflect how I listen, learn, lead, and build relationships across borders.</p>
         </div>
+
+        <figure class="expertise-visual reveal">
+            <img src="images/1000022375.jpg" alt="Youth advocates seated together during a collaborative planning workshop" loading="lazy" decoding="async" />
+            <figcaption>Shared ideas become stronger community action.</figcaption>
+        </figure>
 
         <div class="expertise-wrap">
             <div class="tab-buttons">
@@ -1817,11 +1904,14 @@
             <h2>Conferences, trainings & recognition</h2>
             <p>Experience built through service, learning, fellowships, and public leadership</p>
         </div>
+        <figure class="recognition-poster reveal">
+            <img src="images/1000022559.png" alt="Women Deliver 2023 Conference announcement featuring Magdalene Dorto as an attendee in Kigali, Rwanda" loading="lazy" decoding="async" />
+        </figure>
         <div class="credential-grid">
             <article class="credential-card reveal"><i class="fa-solid fa-globe" style="color: var(--secondary-blue); font-size: 1.4rem;"></i><h3>Global youth fellowships</h3><p>Represented Ghana as an IPPF Global Youth Connect Fellow, Oxfam Power to Choose Youth Forum member, SheDecides Regional Organizer, and Kufuor Scholar.</p></article>
             <article class="credential-card reveal"><i class="fa-solid fa-chalkboard-user" style="color: var(--accent-orange); font-size: 1.4rem;"></i><h3>Digital health & CSE training</h3><p>Co-designed a Digital Global Comprehensive Sexuality Education course for the UNFPA Global Academy and continues to connect digital tools with youth health education.</p></article>
             <article class="credential-card reveal"><i class="fa-solid fa-people-group" style="color: var(--accent-pink); font-size: 1.4rem;"></i><h3>Governance & conferences</h3><p>Served on the Governing Council of PPAG from 2022–2025 and as YAM National Treasurer, contributing to youth-led conversations and community initiatives.</p></article>
-            <article class="credential-card reveal"><i class="fa-solid fa-award" style="color: #4f46e5; font-size: 1.4rem;"></i><h3>Honours & campaigns</h3><p>District winner of the Nneka Youth Foundation Inter-District Spelling Bee for North Tongu and a leader of the #16days4amilliongirls mural advocacy campaign.</p></article>
+            <article class="credential-card reveal"><i class="fa-solid fa-award" style="color: var(--secondary-blue); font-size: 1.4rem;"></i><h3>Honours & campaigns</h3><p>District winner of the Nneka Youth Foundation Inter-District Spelling Bee for North Tongu and a leader of the #16days4amilliongirls mural advocacy campaign.</p></article>
         </div>
     </section>
 
@@ -1862,7 +1952,7 @@
             <p>People, places, and projects behind the work</p>
             <p class="section-description">A visual record of the communities, conversations, and creative spaces that continue to shape my advocacy journey. Select any image to view it larger.</p>
         </div>
-        <figure class="gallery-hero reveal"><img src="images/1001928433.jpg" alt="Magdalene Dorto working at her computer in a bright pink blazer" loading="lazy" decoding="async" /><figcaption>Building thoughtful, data-informed impact across every professional field.</figcaption></figure>
+        <figure class="gallery-hero reveal"><img src="images/1001928433.jpg" alt="Magdalene Dorto working at her computer in a bright pink blazer" loading="lazy" decoding="async" /></figure>
         <div class="gallery-grid">
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023187.jpg" alt="Magdalene Dorto professional portfolio moment" /></figure>
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023188.jpg" alt="Magdalene Dorto connecting with her community" /></figure>
@@ -1893,6 +1983,15 @@
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945167.jpg" alt="Magdalene engaging with participants at an event" loading="lazy" decoding="async" /></figure>
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945169.jpg" alt="Magdalene speaking during a community radio session" loading="lazy" decoding="async" /></figure>
             <figure class="gallery-item reveal" tabindex="0"><img src="images/anti-gbv-preview.jpg" alt="Anti-GBV advocacy poster featured in the pilot project teaser" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022327.jpg" alt="Magdalene participating in a conference discussion" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022375.jpg" alt="Youth advocates seated together during a collaborative planning workshop" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022382.jpg" alt="Magdalene attending a youth leadership conference" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022383.jpg" alt="Magdalene Dorto at the Global Youth Connect conference" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022395%20%281%29.jpg" alt="Youth advocates mapping community priorities at a planning workshop" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022397.jpg" alt="Young advocates sharing ideas around a planning table" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022404.jpg" alt="Magdalene speaking during a youth advocacy meeting" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022476.jpg" alt="Youth advocates talking together outdoors" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022559.png" alt="Women Deliver 2023 Conference announcement featuring Magdalene Dorto" loading="lazy" decoding="async" /></figure>
         </div>
     </section>
 
@@ -2001,7 +2100,10 @@
 
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded portfolio image">
         <button class="lightbox-close" aria-label="Close image"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-nav lightbox-previous" id="lightbox-previous" type="button" aria-label="Previous image"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
         <img src="" alt="" id="lightbox-image" />
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Next image"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <span class="lightbox-status" id="lightbox-status" aria-live="polite"></span>
     </div>
 
     <script>

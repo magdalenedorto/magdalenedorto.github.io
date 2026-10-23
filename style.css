@@ -2,36 +2,36 @@
    1. PREMIUM EXECUTIVE PALETTE & HYBRID THEME VARIABLES (Slate & Earth Tones)
    ========================================================================== */
 :root {
-  /* Premium Slate, Stone, and Earthy Accents */
-  --bg-main: #f1f5f9;           /* Sophisticated light slate background */
-  --bg-surface: #ffffff;        /* Pure white crisp container surface */
-  --text-main: #1e293b;         /* Sharp deep charcoal slate for readable body text */
-  --text-heading: #0f172a;      /* Bold obsidian black for clean structural headings */
-  --text-muted: #64748b;        /* Velvet stone gray for secondary elements */
-  --accent-earth: #b45309;      /* Rich polished amber/earth tone for links and badges */
-  --accent-glow: rgba(180, 83, 9, 0.15);
-  --border-subtle: rgba(226, 232, 240, 0.8);
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.6);
+  /* Shared navy, orange, and white theme */
+  --bg-main: #f7f9fb;
+  --bg-surface: #ffffff;
+  --text-main: #21313f;
+  --text-heading: #173b57;
+  --text-muted: #526574;
+  --accent-earth: #df682e;
+  --accent-glow: rgba(223, 104, 46, 0.14);
+  --border-subtle: rgba(23, 59, 87, 0.14);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(23, 59, 87, 0.12);
   
   /* Layout Shadows */
-  --shadow-editorial: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 8px -1px rgba(15, 23, 42, 0.02);
-  --shadow-premium: 0 20px 40px -5px rgba(15, 23, 42, 0.06);
+  --shadow-editorial: 0 4px 20px -2px rgba(23, 59, 87, 0.06), 0 2px 8px -1px rgba(23, 59, 87, 0.03);
+  --shadow-premium: 0 20px 40px -5px rgba(23, 59, 87, 0.12);
 }
 
 /* 🌙 AUTOMATIC DARK THEME OVERRIDE */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-main: #0b0f19;          /* Premium obsidian/midnight deep sky foundation */
-    --bg-surface: #131c2e;       /* Velvet slate dark card background */
-    --text-main: #94a3b8;        /* Light slate for readable text in dark mode */
-    --text-heading: #f8fafc;     /* Ice white for sharp high-contrast headings */
-    --text-muted: #64748b;
-    --accent-earth: #f59e0b;     /* Vivid glowing gold amber accent for dark viewports */
-    --accent-glow: rgba(245, 158, 11, 0.2);
-    --border-subtle: rgba(30, 41, 59, 0.7);
-    --glass-bg: rgba(19, 28, 46, 0.6);
-    --glass-border: rgba(255, 255, 255, 0.05);
+    --bg-main: #10283a;
+    --bg-surface: #173b57;
+    --text-main: #e5edf2;
+    --text-heading: #ffffff;
+    --text-muted: #bdcbd4;
+    --accent-earth: #ff9b58;
+    --accent-glow: rgba(255, 155, 88, 0.2);
+    --border-subtle: rgba(229, 237, 242, 0.14);
+    --glass-bg: rgba(23, 59, 87, 0.88);
+    --glass-border: rgba(229, 237, 242, 0.12);
   }
 }
 
@@ -46,7 +46,7 @@ html {
 body {
   background-color: var(--bg-main);
   color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   line-height: 1.55;
   margin: 0;
   padding: 0;
@@ -72,7 +72,8 @@ p::selection, h1::selection, h2::selection, span::selection {
 
 h1, h2, h3 {
   color: var(--text-heading);
-  letter-spacing: -0.025em;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0;
   font-weight: 700;
   margin-top: 0;
 }
