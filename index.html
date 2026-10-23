@@ -1242,6 +1242,33 @@
             border-radius: 8px 8px 0 0;
         }
 
+        .documentary-player { position: relative; }
+
+        .documentary-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            min-height: 52px;
+            padding: 0.65rem 1rem;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.86);
+            color: #fff;
+            font: inherit;
+            font-weight: 800;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+        }
+
+        .documentary-play-overlay:hover { background: rgba(15, 23, 42, 0.96); }
+        .documentary-play-overlay i { font-size: 1rem; }
+        .documentary-play-overlay[hidden] { display: none !important; }
+
         .documentary-play-link {
             display: inline-flex;
             align-items: center;
@@ -1850,10 +1877,16 @@
                     <h4>Anti-GBV pilot documentary</h4>
                     <div class="project-video-grid single">
                         <figure class="project-media-item">
-                            <video class="documentary-preview" controls preload="metadata" playsinline poster="images/anti-gbv-preview.jpg" aria-label="25-second preview of the anti-GBV pilot documentary">
-                                <source src="demo-preview.mp4" type="video/mp4" />
-                                Your browser does not support embedded video.
-                            </video>
+                            <div class="documentary-player">
+                                <video class="documentary-preview" controls preload="metadata" playsinline poster="images/anti-gbv-preview.jpg" aria-label="25-second preview of the anti-GBV pilot documentary">
+                                    <source src="demo-preview.mp4" type="video/mp4" />
+                                    Your browser does not support embedded video.
+                                </video>
+                                <button class="documentary-play-overlay" type="button" aria-label="Play preview with sound">
+                                    <i class="fa-solid fa-play" aria-hidden="true"></i>
+                                    <span>Play preview · sound on</span>
+                                </button>
+                            </div>
                             <figcaption>25-second preview · <a class="documentary-play-link" href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook" aria-hidden="true"></i> Watch full video on Facebook <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></figcaption>
                         </figure>
                     </div>
@@ -2118,6 +2151,52 @@
         document.getElementById('live-review').addEventListener('click', () => document.getElementById('feedback-box').classList.toggle('open'));
         document.getElementById('feedback-box').addEventListener('submit', event => { event.preventDefault(); event.target.innerHTML = '<strong>Thank you for your feedback!</strong>'; });
         document.querySelectorAll('.currency').forEach(button => button.addEventListener('click', () => { button.textContent = button.textContent.trim() === '$20' ? 'GH₵260' : 'GH₵650'; }));
+
+        const documentaryPreview = document.querySelector('.documentary-preview');
+        if (documentaryPreview) {
+            const documentaryPlayButton = document.querySelector('.documentary-play-overlay');
+            documentaryPreview.volume = 1;
+            documentaryPreview.muted = false;
+            documentaryPlayButton.addEventListener('click', async () => {
+                documentaryPreview.muted = false;
+                documentaryPreview.volume = 1;
+                try {
+                    await documentaryPreview.play();
+                } catch (error) {
+                    documentaryPlayButton.hidden = false;
+                }
+            });
+            documentaryPreview.addEventListener('playing', () => { documentaryPlayButton.hidden = true; });
+            documentaryPreview.addEventListener('waiting', () => { documentaryPlayButton.hidden = false; });
+            documentaryPreview.addEventListener('pause', () => { documentaryPlayButton.hidden = false; });
+            documentaryPreview.addEventListener('ended', () => { documentaryPlayButton.hidden = false; });
+            documentaryPreview.addEventListener('error', () => { documentaryPlayButton.hidden = false; });
+            documentaryPreview.addEventListener('play', async () => {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass || documentaryPreview.dataset.audioBoosted) return;
+
+                try {
+                    const audioContext = new AudioContextClass();
+                    const mediaSource = audioContext.createMediaElementSource(documentaryPreview);
+                    const gain = audioContext.createGain();
+                    const compressor = audioContext.createDynamicsCompressor();
+                    gain.gain.value = 2.5;
+                    compressor.threshold.value = -8;
+                    compressor.knee.value = 8;
+                    compressor.ratio.value = 5;
+                    compressor.attack.value = 0.003;
+                    compressor.release.value = 0.25;
+                    mediaSource.connect(gain);
+                    gain.connect(compressor);
+                    compressor.connect(audioContext.destination);
+                    documentaryPreview.dataset.audioBoosted = 'true';
+                    if (audioContext.state === 'suspended') await audioContext.resume();
+                } catch (error) {
+                    documentaryPreview.volume = 1;
+                }
+            }, { once: true });
+        }
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
