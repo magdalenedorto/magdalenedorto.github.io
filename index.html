@@ -15,7 +15,7 @@
             --accent-orange: #f97316;
             --accent-pink: #ec4899;
             --accent-brown: #db580d;
-            --bg-light: #06288fd1;
+            --bg-light: #f5f8fc;
             --surface-white: #ffffff;
             --text-main: #0f172a;
             --text-muted: #475569;
@@ -31,15 +31,14 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
             overflow-x: clip;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background:
-                radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 22%),
-                radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.08), transparent 20%),
+                radial-gradient(circle at top left, rgba(59, 130, 246, 0.045), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.04), transparent 20%),
                 var(--bg-light);
             color: var(--text-main);
             line-height: 1.7;
@@ -71,6 +70,7 @@
         }
 
         .nav-container {
+            position: relative;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -80,7 +80,8 @@
         }
 
         .menu-toggle {
-            display: none;
+            display: grid;
+            place-items: center;
             border: 1px solid rgba(30, 58, 138, 0.15);
             background: var(--surface-white);
             color: var(--primary-blue);
@@ -187,21 +188,54 @@
         }
 
         .nav-links {
-            display: flex;
-            gap: 2rem;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 2rem;
+            z-index: 1001;
+            display: none;
+            width: min(360px, calc(100vw - 2rem));
+            max-height: min(70vh, 520px);
+            overflow-y: auto;
+            padding: 0.55rem;
+            gap: 0.2rem;
             list-style: none;
-            align-items: center;
+            align-items: stretch;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            border-radius: 14px;
+            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
         }
 
+        .nav-links.open { display: grid; }
+
+        .nav-links button {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            border: 0;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--primary-blue);
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .nav-links button:hover { background: rgba(59, 130, 246, 0.07); }
+
         .nav-links a {
+            display: block;
+            padding: 0.7rem 0.85rem;
             font-weight: 600;
             font-size: 0.95rem;
             color: var(--text-muted);
+            border-radius: 9px;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--secondary-blue);
+            background: rgba(59, 130, 246, 0.07);
         }
 
         .btn-contact {
@@ -396,18 +430,164 @@
         }
 
         section {
-            padding: 4.5rem 2rem;
+            padding: 4.5rem 2rem 7.5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .slide-container {
-            scroll-snap-type: y mandatory;
+        .mode-choice[hidden],
+        .slide-container[hidden],
+        .slide-controls[hidden],
+        footer[hidden] { display: none !important; }
+
+        .mode-choice {
+            display: grid;
+            place-items: center;
+            min-height: min(760px, calc(100svh - 80px));
+            padding: 3rem 1.5rem;
         }
 
+        .mode-choice-inner {
+            width: min(760px, 100%);
+            text-align: center;
+        }
+
+        .mode-choice .eyebrow { display: inline-block; margin-bottom: 0.8rem; }
+        .mode-choice h1 { margin-bottom: 0.8rem; color: var(--primary-blue); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.12; }
+        .mode-choice-intro { max-width: 580px; margin: 0 auto; color: var(--text-muted); }
+
+        .mode-options {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .mode-option {
+            display: grid;
+            align-content: start;
+            justify-items: start;
+            min-height: 190px;
+            padding: 1.35rem;
+            border: 1px solid rgba(32, 30, 138, 0.15);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.88);
+            color: var(--text-main);
+            box-shadow: var(--card-shadow);
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mode-option:hover,
+        .mode-option:focus-visible {
+            transform: translateY(-3px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 18px 34px rgba(30, 58, 138, 0.14);
+            outline: none;
+        }
+
+        .mode-option i { margin-bottom: 1rem; color: var(--accent-orange); font-size: 1.3rem; }
+        .mode-option strong { margin-bottom: 0.4rem; color: var(--primary-blue); font-size: 1.05rem; }
+        .mode-option span { color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; }
+
+        .slide-container.flow-mode .slide {
+            display: block;
+            scroll-margin-top: 88px;
+        }
+
+        body[data-view-mode="pages"] .slide-controls { display: grid; }
+        body[data-view-mode="flow"] .slide-controls { display: none; }
+        body:not([data-view-mode]) .menu-toggle { display: none; }
+
         .slide {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slide-enter 0.32s ease both;
+        }
+
+        @keyframes slide-enter {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-controls {
+            position: fixed;
+            z-index: 900;
+            right: 1rem;
+            bottom: 1rem;
+            left: 1rem;
+            display: grid;
+            grid-template-columns: auto minmax(70px, 1fr) auto;
+            align-items: center;
+            gap: 1rem;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0.65rem 0.8rem;
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 10px 34px rgba(15, 23, 42, 0.14);
+            backdrop-filter: blur(14px);
+        }
+
+        .slide-control-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 42px;
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgba(32, 30, 138, 0.16);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--primary-blue);
+            font: inherit;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .slide-control-button:hover:not(:disabled) {
+            background: #f1f5ff;
+        }
+
+        .slide-control-button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .slide-progress {
+            display: grid;
+            gap: 0.25rem;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .slide-status {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .slide-progress-track {
+            height: 4px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e2e8f0;
+        }
+
+        .slide-progress-value {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--accent-orange);
+            transition: width 0.25s ease;
         }
 
         .section-title {
@@ -968,6 +1148,148 @@
             margin-bottom: 1rem;
         }
 
+        .project-media {
+            margin: 2.5rem auto 2rem;
+            text-align: left;
+        }
+
+        .project-media-heading {
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .project-process {
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            border: 1px solid rgba(32, 30, 138, 0.12);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .project-process h4,
+        .project-stream-title {
+            margin-bottom: 0.45rem;
+            color: var(--primary-blue);
+            font-size: 1rem;
+        }
+
+        .project-process p,
+        .project-stream-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .project-workstreams {
+            display: grid;
+            gap: 0.8rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project-workstream {
+            min-width: 0;
+            padding: 1rem;
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .project-stream-title { margin-top: 0.25rem; }
+        .project-stream-description { margin-bottom: 0.85rem; }
+
+        .project-photo-grid,
+        .project-video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        .project-photo-grid.single { grid-template-columns: minmax(0, 1fr); }
+        .project-video-grid.single { grid-template-columns: minmax(0, 1fr); max-width: 820px; }
+
+        .project-video-section { margin-top: 1.5rem; }
+        .project-video-section > h4 { margin-bottom: 0.75rem; color: var(--primary-blue); }
+
+        .project-media-item {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+        }
+
+        .project-media-item img,
+        .project-media-item video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            background: #101827;
+        }
+
+        .project-media-item video { aspect-ratio: 16 / 9; }
+
+        .documentary-preview {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #101827;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .documentary-play-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+        }
+
+        .documentary-play-link:hover { text-decoration: underline; }
+
+        .project-media-item figcaption {
+            padding: 0.7rem 0.8rem;
+            color: var(--text-main);
+            font-size: 0.84rem;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .project-support-note {
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .pilot-documentary-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            margin: 0 auto 1.5rem;
+            padding: 0.8rem 1.15rem;
+            border: 1px solid rgba(32, 30, 138, 0.16);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--primary-blue);
+            font-weight: 800;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pilot-documentary-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .pilot-documentary-link i { color: #1877f2; font-size: 1.15rem; }
+
         .btn-group {
             display: flex;
             justify-content: center;
@@ -1070,26 +1392,43 @@
 
         @media (max-width: 640px) {
             .nav-container {
-                flex-wrap: wrap;
-                gap: 0.75rem;
                 padding: 0.8rem 1rem;
             }
 
-            .menu-toggle { display: block; }
+            .nav-links { right: 1rem; }
 
-            .nav-links {
-                display: none;
-                width: 100%;
-                padding: 0.5rem 0 0.25rem;
-                gap: 0.8rem;
+            .mode-choice { min-height: min(720px, calc(100svh - 72px)); padding: 2.5rem 1rem; }
+            .mode-options { grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.5rem; }
+            .mode-option { min-height: 0; padding: 1rem; grid-template-columns: 28px 1fr; column-gap: 0.7rem; }
+            .mode-option i { grid-row: span 2; margin: 0.15rem 0 0; }
+            .mode-option strong { margin: 0; }
+            .mode-option span { grid-column: 2; }
+
+            .slide-controls {
+                right: 0.65rem;
+                bottom: 0.65rem;
+                left: 0.65rem;
+                gap: 0.45rem;
+                padding: 0.5rem;
             }
 
-            .nav-links.open { display: flex; }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            .slide-control-button {
+                min-height: 40px;
+                gap: 0.35rem;
+                padding: 0.45rem 0.6rem;
+                font-size: 0.78rem;
             }
+
+            .slide-status { font-size: 0.65rem; }
+
+            section { padding-bottom: 6.5rem; }
+
+            .project-media { margin: 1.8rem auto 1.5rem; }
+            .project-media-heading { font-size: 1.3rem; }
+            .project-workstreams { grid-template-columns: minmax(0, 1fr); }
+            .project-photo-grid,
+            .project-video-grid { grid-template-columns: minmax(0, 1fr); gap: 0.65rem; }
+            .project-media-item figcaption { padding: 0.6rem; font-size: 0.76rem; }
 
             .hero {
                 padding-top: 4rem;
@@ -1149,24 +1488,45 @@
                     <button class="language-button" type="button" data-language="fr" aria-pressed="false" lang="fr">FR</button>
                 </div>
             </div>
-            <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-            <ul class="nav-links">
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="section-menu"><i class="fa-solid fa-bars"></i></button>
+            <ul class="nav-links" id="section-menu" aria-label="Page sections">
+                <li><button id="change-view-mode" type="button">Change viewing mode</button></li>
                 <li><a href="#about" data-target="about">About</a></li>
-                <li><a href="#expertise">Expertise</a></li>
-                 <li><a href="#origin">When I was a girl</a></li>
-                 <li><a href="#teaching">Teaching Philosophy</a></li>
-                <li><a href="#teaching">Book a Spanish Class</a></li>
-                <li><a href="#recognition">Recognitions</a></li>
-                <li><a href="#values">Values</a></li>
-                <li><a href="#aspirations">Career Aspirations</a></li>
-                <li><a href="#gallery" data-target="gallery">Gallery</a></li>
-                <li><a href="#contact" data-target="contact" class="btn-contact">Get in Touch</a></li>
+                <li><a href="#spotlight" data-target="spotlight">Spotlight</a></li>
+                <li><a href="#expertise" data-target="expertise">Expertise</a></li>
+                <li><a href="#origin" data-target="origin">My Story</a></li>
+                <li><a href="#values" data-target="values">Values</a></li>
+                <li><a href="#teaching" data-target="teaching">Teaching &amp; Classes</a></li>
+                <li><a href="#recognition" data-target="recognition">Recognition</a></li>
+                <li><a href="#aspirations" data-target="aspirations">Career Aspirations</a></li>
+                <li><a href="#gallery" data-target="gallery">Moments of Impact</a></li>
+                <li><a href="#contact" data-target="contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <div class="slide-container">
-    <section class="hero slide" id="about">
+    <main class="mode-choice" id="mode-choice" aria-labelledby="mode-choice-title">
+        <div class="mode-choice-inner">
+            <span class="eyebrow">Explore Magdalene's work</span>
+            <h1 id="mode-choice-title">How would you like to explore?</h1>
+            <p class="mode-choice-intro">Choose the pace that works for you. You can change it anytime from the menu.</p>
+            <div class="mode-options">
+                <button class="mode-option" type="button" data-view-mode="pages">
+                    <i class="fa-solid fa-clone" aria-hidden="true"></i>
+                    <strong>One page at a time</strong>
+                    <span>Move through each part with clear Back and Next controls.</span>
+                </button>
+                <button class="mode-option" type="button" data-view-mode="flow">
+                    <i class="fa-solid fa-arrows-down-to-line" aria-hidden="true"></i>
+                    <strong>Continuous scroll</strong>
+                    <span>See the full story in one flowing page and scroll at your own pace.</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="slide-container" hidden>
+    <section class="hero slide active" id="about">
         <div class="reveal">
             <div class="hero-title-badge" aria-label="Four areas of impact">
                 <span><i class="fa-solid fa-microchip"></i> AI & Data Science</span>
@@ -1296,24 +1656,6 @@
         </div>
     </section>
 
-    <section class="slide" id="gallery">
-        <div class="section-title">
-            <h2>Moments of impact</h2>
-            <p>People, places, and projects behind the work</p>
-            <p class="section-description">A visual record of the communities, conversations, and creative spaces that continue to shape my advocacy journey. Select any image to view it larger.</p>
-        </div>
-        <figure class="gallery-hero reveal"><img src="images/1001928433.jpg" alt="Magdalene Dorto working at her computer in a bright pink blazer" loading="lazy" decoding="async" /><figcaption>Building thoughtful, data-informed impact across every professional field.</figcaption></figure>
-        <div class="gallery-grid">
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023187.jpg" alt="Magdalene Dorto professional portfolio moment" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023188.jpg" alt="Magdalene Dorto connecting with her community" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022596.jpg" alt="Magdalene during an advocacy activity" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022660.jpg" alt="Magdalene at a public gathering" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022709.jpg" alt="Magdalene participating in a group activity" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022736.jpg" alt="A community project moment" /></figure>
-            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023185.jpg" alt="Magdalene speaking with participants" /></figure>
-        </div>
-    </section>
-
     <section class="slide" id="origin">
         <div class="section-title">
             <span class="eyebrow">The beginning of the work</span>
@@ -1337,7 +1679,7 @@
                 <p>My passion for excellence began in Mepe, North Tongu, where I learned that leadership starts with showing up for others.</p>
             </div>
             <div>
-                <p>From Primary 4 through Junior High, I took part in the competitive Fosu Exams and served as Girls Prefect in both primary and JHS. Later, as a YAM Branch Chair, I led self-sponsored and grant-funded community initiatives and grew into a regional and international youth advocate.</p>
+                <p>From Primary 4 through Junior High, I took part in the competitive Fosu Exams and served as Girls Prefect in both primary and JHS. Later, as a YAM Branch Chair, I led self-sponsored and grant-funded community initiatives. I have served as a regional and international youth advocate since 2016.</p>
                 <p class="diplomacy-note" style="margin-top: 1rem;">That early grounding still shapes my interest in international relations and diplomacy: I want to understand how institutions, communities, and young people can work across borders to create fairer opportunities.</p>
             </div>
         </div>
@@ -1367,14 +1709,14 @@
         </div>
         <div class="philosophy-card reveal">
             <div>
-                <span class="eyebrow">Mi filosofía docente</span>
+                <span class="eyebrow">My teaching philosophy</span>
                 <h3>Learn to inhabit the language.</h3>
                 <p class="section-description" style="margin: 0; text-align: left;">Spanish is more than a set of rules. It is belonging, culture, connection, and a new way of thinking.</p>
             </div>
-            <div class="philosophy-copy" lang="es">
-                <p>Mi filosofía docente concibe la enseñanza del español como una herramienta de pertenencia cultural e interseccionalidad, donde el estudiante no solo memoriza reglas, sino que aprende a habitar la lengua, su cultura y su forma de pensar. Entiendo de primera mano las dudas y retos que implica empezar desde cero; por ello, mi meta es acompañar a cada persona en ese recorrido hasta que alcance un dominio pleno, fluido y autónomo.</p>
-                <p>En el entorno virtual, transformo la tecnología en un puente para acortar distancias e integrar la realidad del mundo hispanohablante. Este enfoque moderno complementa la enseñanza tradicional: combina el rigor de la estructura gramatical con la comunicación real y contextualizada.</p>
-                <p>Desde una perspectiva inclusiva, culturalmente sensible y libre de sesgos, reconozco que cada estudiante aborda el aprendizaje desde una experiencia de vida y un ritmo únicos. Creo un espacio seguro donde la confianza es el eje central y el error se utiliza como una herramienta pedagógica de crecimiento.</p>
+            <div class="philosophy-copy" lang="en">
+                <p>My teaching philosophy treats Spanish as a way to build cultural connection and belonging. Students do more than memorize rules: they learn to inhabit the language, its culture, and its ways of thinking. Because I understand the doubts that come with starting from scratch, I support each learner as they build confidence, fluency, and independence.</p>
+                <p>In online lessons, I use technology to bring the Spanish-speaking world closer. The approach combines clear grammar instruction with practical, contextual conversation so learners can use Spanish beyond the classroom.</p>
+                <p>Every student brings a different experience and pace to learning. I create an inclusive, culturally responsive space where learners feel safe, confidence can grow, and mistakes become part of the learning process.</p>
             </div>
         </div>
         <div class="booking-grid" style="margin-top: 1.5rem;">
@@ -1440,11 +1782,85 @@
         </div>
     </section>
 
+    <section class="slide" id="gallery">
+        <div class="section-title">
+            <h2>Moments of impact</h2>
+            <p>People, places, and projects behind the work</p>
+            <p class="section-description">A visual record of the communities, conversations, and creative spaces that continue to shape my advocacy journey. Select any image to view it larger.</p>
+        </div>
+        <figure class="gallery-hero reveal"><img src="images/1001928433.jpg" alt="Magdalene Dorto working at her computer in a bright pink blazer" loading="lazy" decoding="async" /><figcaption>Building thoughtful, data-informed impact across every professional field.</figcaption></figure>
+        <div class="gallery-grid">
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023187.jpg" alt="Magdalene Dorto professional portfolio moment" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023188.jpg" alt="Magdalene Dorto connecting with her community" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022596.jpg" alt="Magdalene during an advocacy activity" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022660.jpg" alt="Magdalene at a public gathering" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022709.jpg" alt="Magdalene participating in a group activity" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022736.jpg" alt="A community project moment" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023185.jpg" alt="Magdalene speaking with participants" /></figure>
+        </div>
+    </section>
+
     <section class="slide" id="contact">
         <div class="support-section reveal">
             <h2>Support the flagship project</h2>
-            <p style="max-width: 700px; margin: 0 auto 1rem; color: var(--accent-brown); font-weight: 700;">Let's turn youth-centered ideas into visible, measurable community action.</p>
-            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">I welcome conversations with like-minded organisations, diplomatic and development networks, educators, and community leaders. I am ready to support youth consulting, SRHR, project facilitation, multilingual communication, cultural exchange, and mission-driven initiatives.</p>
+            <p style="max-width: 700px; margin: 0 auto 1rem; color: var(--accent-brown); font-weight: 700;">A youth-led anti-GBV initiative with two strands: school outreach and mural advocacy.</p>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted);">Each project begins with preliminary stakeholder visits and community-entry engagement. We listen, build relationships, and prepare with community partners before activities commence.</p>
+
+            <a class="pilot-documentary-link" href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                <span>Watch the pilot project documentary on Facebook</span>
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+            <p class="project-support-note">This pilot is a model we envision adapting and replicating with more communities.</p>
+
+            <div class="project-media">
+                <h3 class="project-media-heading">Two strands of anti-GBV action</h3>
+                <p class="project-support-note">The pilot brings gender-based violence prevention into school outreach and public mural advocacy. Support helps community-led prevention work reach more young people.</p>
+                <div class="project-process">
+                    <h4>Before activities commence</h4>
+                    <p>Preliminary stakeholder visits and community-entry engagements come first. This groundwork helps the team listen, coordinate with local partners, and shape activities with the communities involved.</p>
+                </div>
+                <div class="project-workstreams">
+                    <article class="project-workstream">
+                        <h4 class="project-stream-title">01 / School outreach</h4>
+                        <p class="project-stream-description">School-based conversations that build awareness, encourage safer communities, and help young people challenge gender-based violence.</p>
+                        <div class="project-photo-grid">
+                            <figure class="project-media-item">
+                                <img src="images/1001266091.jpg" alt="Student holding menstrual-health products during a school outreach activity" loading="lazy" decoding="async" />
+                                <figcaption>School outreach</figcaption>
+                            </figure>
+                            <figure class="project-media-item">
+                                <img src="images/1001266099.jpg" alt="Community members holding menstrual-health products at an outreach event" loading="lazy" decoding="async" />
+                                <figcaption>Health resources in the community</figcaption>
+                            </figure>
+                        </div>
+                    </article>
+                    <article class="project-workstream">
+                        <h4 class="project-stream-title">02 / Mural advocacy</h4>
+                        <p class="project-stream-description">A public, youth-led anti-GBV mural that makes prevention visible and invites community conversation.</p>
+                        <div class="project-photo-grid single">
+                            <figure class="project-media-item">
+                                <img src="images/1001253656.jpg" alt="Young people gathered at a community mural and advocacy event" loading="lazy" decoding="async" />
+                                <figcaption>Youth-led mural advocacy</figcaption>
+                            </figure>
+                        </div>
+                    </article>
+                </div>
+                <div class="project-video-section">
+                    <h4>Anti-GBV pilot documentary</h4>
+                    <div class="project-video-grid single">
+                        <figure class="project-media-item">
+                            <video class="documentary-preview" controls preload="metadata" playsinline poster="images/anti-gbv-preview.jpg" aria-label="25-second preview of the anti-GBV pilot documentary">
+                                <source src="demo-preview.mp4" type="video/mp4" />
+                                Your browser does not support embedded video.
+                            </video>
+                            <figcaption>25-second preview · <a class="documentary-play-link" href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook" aria-hidden="true"></i> Watch full video on Facebook <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <p class="project-support-note">I welcome partners and supporters who want to help prepare and sustain both strands of this community-led work.</p>
 
             <div class="btn-group">
                 <button class="btn-secondary" id="live-review" type="button">Live Review</button>
@@ -1457,7 +1873,18 @@
     </section>
     </div>
 
-    <footer>
+    <nav class="slide-controls" aria-label="Section navigation" hidden>
+        <button class="slide-control-button" id="previous-slide" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span>Back</span></button>
+        <div class="slide-progress">
+            <span class="slide-status" id="slide-status" aria-live="polite">01 / 10 · About</span>
+            <div class="slide-progress-track" role="progressbar" aria-label="Section progress" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+                <div class="slide-progress-value"></div>
+            </div>
+        </div>
+        <button class="slide-control-button" id="next-slide" type="button"><span>Next</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </nav>
+
+    <footer hidden>
         <p>Designed & Coded by <strong>Magdalene Dorto</strong></p>
         <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem;">Accra, Ghana | Multilingual Youth & SRHR Advocacy Leader</p>
 
@@ -1515,17 +1942,150 @@
 
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const modeChoice = document.getElementById('mode-choice');
+        const slideContainer = document.querySelector('.slide-container');
+        const siteFooter = document.querySelector('footer');
+        const slides = [...document.querySelectorAll('.slide')];
+        const previousSlide = document.getElementById('previous-slide');
+        const nextSlide = document.getElementById('next-slide');
+        const slideStatus = document.getElementById('slide-status');
+        const progressBar = document.querySelector('.slide-progress-track');
+        const progressValue = document.querySelector('.slide-progress-value');
+        const modeButtons = document.querySelectorAll('.mode-option');
+        const changeModeButton = document.getElementById('change-view-mode');
+        let currentSlideIndex = 0;
+        let currentViewMode = null;
+
+        function updateCurrentSlide(index) {
+            currentSlideIndex = index;
+            slides.forEach((slide, slideIndex) => {
+                const isActive = slideIndex === currentSlideIndex;
+                slide.classList.toggle('active', isActive);
+                slide.setAttribute('aria-hidden', String(currentViewMode === 'pages' && !isActive));
+                if (currentViewMode === 'flow' || isActive) {
+                    slide.querySelectorAll('.reveal').forEach(element => element.classList.add('visible'));
+                }
+            });
+
+            const activeLink = navLinks.querySelector(`[data-target="${slides[index].id}"]`);
+            const sectionName = activeLink ? activeLink.textContent.trim() : slides[index].id;
+            slideStatus.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')} · ${sectionName}`;
+            progressBar.setAttribute('aria-valuenow', String(index + 1));
+            progressValue.style.width = `${((index + 1) / slides.length) * 100}%`;
+            previousSlide.disabled = index === 0;
+            nextSlide.disabled = index === slides.length - 1;
+            siteFooter.hidden = currentViewMode === 'pages' && index !== slides.length - 1;
+            navLinks.querySelectorAll('a[data-target]').forEach(link => {
+                if (link.dataset.target === slides[index].id) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
+            });
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Open navigation menu');
+            menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
+
+        function goToSlide(targetId, updateHistory = true) {
+            const nextIndex = slides.findIndex(slide => slide.id === targetId);
+            if (nextIndex < 0 || !currentViewMode) return;
+
+            updateCurrentSlide(nextIndex);
+            closeMenu();
+            if (currentViewMode === 'flow') {
+                slides[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            if (updateHistory && window.location.hash !== `#${targetId}`) {
+                window.history.pushState(null, '', `#${targetId}`);
+            }
+        }
+
+        function chooseViewMode(mode, targetId = slides[0].id, updateHistory = true) {
+            currentViewMode = mode;
+            document.body.dataset.viewMode = mode;
+            modeChoice.hidden = true;
+            slideContainer.hidden = false;
+            slideContainer.classList.toggle('flow-mode', mode === 'flow');
+            document.querySelector('.slide-controls').hidden = mode !== 'pages';
+            if (mode === 'flow') slides.forEach(slide => slide.classList.add('active'));
+            goToSlide(targetId, updateHistory);
+        }
+
+        function showModeChoice() {
+            currentViewMode = null;
+            delete document.body.dataset.viewMode;
+            modeChoice.hidden = false;
+            slideContainer.hidden = true;
+            slideContainer.classList.remove('flow-mode');
+            document.querySelector('.slide-controls').hidden = true;
+            siteFooter.hidden = true;
+            closeMenu();
+            window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        modeButtons.forEach(button => button.addEventListener('click', () => {
+            chooseViewMode(button.dataset.viewMode);
+        }));
+
+        changeModeButton.addEventListener('click', showModeChoice);
+
         menuToggle.addEventListener('click', () => {
             const isOpen = navLinks.classList.toggle('open');
-            menuToggle.setAttribute('aria-expanded', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
             menuToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
         });
 
-        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        navLinks.querySelectorAll('a[data-target]').forEach(link => link.addEventListener('click', event => {
+            event.preventDefault();
+            goToSlide(link.dataset.target);
         }));
+
+        previousSlide.addEventListener('click', () => {
+            if (currentSlideIndex > 0) goToSlide(slides[currentSlideIndex - 1].id);
+        });
+
+        nextSlide.addEventListener('click', () => {
+            if (currentSlideIndex < slides.length - 1) goToSlide(slides[currentSlideIndex + 1].id);
+        });
+
+        document.addEventListener('click', event => {
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+                closeMenu();
+                menuToggle.focus();
+            }
+        });
+
+        window.addEventListener('popstate', () => {
+            const targetId = slides.some(slide => slide.id === window.location.hash.slice(1))
+                ? window.location.hash.slice(1)
+                : slides[0].id;
+            if (currentViewMode) goToSlide(targetId, false);
+        });
+
+        const initialHash = window.location.hash.slice(1);
+        if (slides.some(slide => slide.id === initialHash)) chooseViewMode('pages', initialHash, false);
+
+        const flowObserver = new IntersectionObserver(entries => {
+            if (currentViewMode !== 'flow') return;
+            const visibleSlides = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((first, second) => second.intersectionRatio - first.intersectionRatio);
+            if (visibleSlides.length) {
+                const index = slides.indexOf(visibleSlides[0].target);
+                if (index !== currentSlideIndex) updateCurrentSlide(index);
+            }
+        }, { rootMargin: '-25% 0px -55% 0px', threshold: [0, 0.25, 0.5] });
+        slides.forEach(slide => flowObserver.observe(slide));
 
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightbox-image');
@@ -1572,15 +2132,6 @@
             if (applySelectedLanguage()) observer.disconnect();
         }
 
-        const revealObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
           </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
