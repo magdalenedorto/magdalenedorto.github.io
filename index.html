@@ -252,13 +252,62 @@
         }
 
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem 3rem;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        .hero-cover {
+            position: relative;
+            width: 100%;
+            height: clamp(500px, 60vw, 700px);
+            overflow: hidden;
+            background: #182335;
+        }
+
+        .hero-cover::after {
+            position: absolute;
+            inset: 0;
+            content: "";
+            background: linear-gradient(90deg, rgba(10, 17, 31, 0.02) 0%, rgba(10, 17, 31, 0.12) 38%, rgba(10, 17, 31, 0.84) 100%);
+            pointer-events: none;
+        }
+
+        .hero-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 36%;
+        }
+
+        .hero-cover-content {
+            position: absolute;
+            z-index: 1;
+            inset: 0;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
             align-items: center;
+            padding: 3rem max(1rem, calc((100vw - 1200px) / 2));
+        }
+
+        .hero-cover-copy {
+            width: min(100%, 620px);
+            margin: 0 auto;
+            margin-right: 0;
+            color: #fff;
+        }
+
+        .hero-cover-copy h1 {
+            color: #fff;
+            font-size: 3.6rem;
+            text-shadow: 0 2px 22px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-story {
+            width: min(100%, 1200px);
+            margin: 0 auto;
+            padding: 2rem 2rem 5rem;
         }
 
         .hero-title-badge {
@@ -266,14 +315,14 @@
             flex-wrap: wrap;
             gap: 0.45rem;
             align-items: center;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(236, 72, 153, 0.1));
-            color: var(--primary-blue);
+            background: rgba(15, 23, 42, 0.46);
+            color: #fff;
             padding: 0.55rem 0.7rem;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.72rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.35);
         }
 
         .hero-title-badge span {
@@ -292,21 +341,22 @@
         .hero-title-badge span:nth-child(4) i { color: #4f46e5; }
 
         .hero h1 {
-            font-size: clamp(2.6rem, 4vw, 4.2rem);
+            font-size: 3.6rem;
             line-height: 1.12;
-            color: var(--primary-blue);
+            color: #fff;
             margin-bottom: 1.5rem;
+            text-shadow: 0 2px 22px rgba(0, 0, 0, 0.35);
         }
 
-        .hero p.tagline {
+        .hero-cover p.tagline {
             font-size: 1.12rem;
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.94);
             margin-bottom: 2rem;
             max-width: 640px;
         }
 
         .quote-box {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.541), rgba(255,255,255,0.75));
+            background: rgba(255, 255, 255, 0.94);
             border-left: 4px solid var(--accent-orange);
             padding: 1.5rem 1.8rem;
             border-radius: 0 16px 16px 0;
@@ -540,15 +590,17 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            min-height: 42px;
-            padding: 0.55rem 0.9rem;
-            border: 1px solid rgba(32, 30, 138, 0.16);
-            border-radius: 9px;
+            min-height: 0;
+            background: transparent;
             background: #fff;
             color: var(--primary-blue);
-            font: inherit;
-            font-size: 0.88rem;
-            font-weight: 700;
+            .hero-cover { height: 680px; }
+            .hero-cover img { object-position: 38% 36%; }
+            .hero-cover::after { background: linear-gradient(180deg, rgba(10, 17, 31, 0.02) 0%, rgba(10, 17, 31, 0.08) 35%, rgba(10, 17, 31, 0.9) 100%); }
+            .hero-cover-content { align-items: end; padding: 1.25rem 1rem 2rem; }
+            .hero-cover-copy { width: 100%; }
+            .hero h1 { font-size: 2.35rem; }
+            .hero-story { padding: 1.5rem 1rem 6.5rem; }
             cursor: pointer;
         }
 
@@ -1458,12 +1510,12 @@
             .project-media-item figcaption { padding: 0.6rem; font-size: 0.76rem; }
 
             .hero {
-                padding-top: 4rem;
+                padding: 0;
             }
 
-            .hero-portrait img {
-                height: 420px;
-            }
+            .hero-cover { height: clamp(250px, 72vw, 340px); }
+            .hero-cover img { object-position: center 30%; }
+            .hero > .reveal { padding: 2.25rem 1rem 6rem; }
 
             section { padding: 3.5rem 1rem; }
             .spotlight-card, .support-section, .info-card { padding: 1.6rem; }
@@ -1554,34 +1606,29 @@
 
     <div class="slide-container" hidden>
     <section class="hero slide active" id="about">
-        <div class="reveal">
-            <div class="hero-title-badge" aria-label="Four areas of impact">
-                <span><i class="fa-solid fa-microchip"></i> AI & Data Science</span>
-                <span><i class="fa-solid fa-language"></i> Multilingual</span>
-                <span><i class="fa-solid fa-heart-pulse"></i> 10+ Years of Youth & SRHR Advocacy</span>
-                <span><i class="fa-solid fa-earth-americas"></i> International Relations & Diplomacy</span>
+        <div class="hero-cover">
+            <img src="images/1000022388%20%281%29.jpg" alt="Magdalene writing workshop notes during a youth advocacy session" width="1080" height="1440" fetchpriority="high" decoding="async" />
+            <div class="hero-cover-content">
+                <div class="hero-cover-copy">
+                    <div class="hero-title-badge" aria-label="Four areas of impact">
+                        <span><i class="fa-solid fa-microchip"></i> AI & Data Science</span>
+                        <span><i class="fa-solid fa-language"></i> Multilingual</span>
+                        <span><i class="fa-solid fa-heart-pulse"></i> 10+ Years of Youth & SRHR Advocacy</span>
+                        <span><i class="fa-solid fa-earth-americas"></i> International Relations & Diplomacy</span>
+                    </div>
+
+                    <h1>Hello, welcome to my portfolio website.</h1>
+                    <p class="tagline">I am a multilingual youth and SRHR advocate, student researcher, and data intelligence enthusiast committed to empowering young people across Ghana, Africa, and beyond through meaningful leadership and evidence-based action.</p>
+                </div>
             </div>
-
-            <h1>Hello, welcome to my portfolio website.</h1>
-
-            <p class="tagline">I am a multilingual youth and SRHR advocate, student researcher, and data intelligence enthusiast committed to empowering young people across Ghana, Africa, and beyond through meaningful leadership and evidence-based action.</p>
-
+        </div>
+        <div class="hero-story reveal">
             <div class="quote-box">
                 <p>"I am passionate about youth development because the system once worked in my favor as a young person from a vulnerable group. Knowing what might have happened without that support, I have been committed since 2016 to empowering the next generation. My Spanish and French language skills help me connect across communities."</p>
                 <span class="quote-author">— Magdalene Dorto</span>
             </div>
         </div>
 
-        <div class="hero-image-wrapper reveal">
-            <span class="language-spark" aria-hidden="true">🇪🇸</span>
-            <span class="book-spark" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
-            <div class="hero-portrait">
-                <img src="images/1000022388%20%281%29.jpg" alt="Magdalene Dorto portrait" />
-            </div>
-            <div class="tech-badge">
-                <i class="fa-solid fa-code"></i> AI & Data Science Enthusiast
-            </div>
-        </div>
     </section>
 
     <section class="slide" id="spotlight">
@@ -1824,6 +1871,28 @@
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022709.jpg" alt="Magdalene participating in a group activity" /></figure>
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022736.jpg" alt="A community project moment" /></figure>
             <figure class="gallery-item reveal" tabindex="0"><img src="images/1000023185.jpg" alt="Magdalene speaking with participants" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000022388%20%281%29.jpg" alt="Magdalene Dorto at a community workshop" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1000060236.jpg" alt="Participants at a youth advocacy event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001032801.jpg" alt="Magdalene with students during an outdoor school engagement" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001253656.jpg" alt="Young people gathered beside a community advocacy mural" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001266091.jpg" alt="Student holding menstrual-health products during outreach" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001266099.jpg" alt="Community members holding health resources at an outreach event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945154.jpg" alt="Magdalene and colleagues at a community event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945155.jpg" alt="Magdalene with fellow youth advocates" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945156.jpg" alt="Youth advocates participating in a community activity" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945157.jpg" alt="Community engagement with local residents" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945158.jpg" alt="Young people taking part in an advocacy activity" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945159.jpg" alt="Magdalene speaking during a community event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945160.jpg" alt="Community outreach and stakeholder engagement" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945161.jpg" alt="Youth advocates at a community gathering" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945162.jpg" alt="Magdalene with partners at an advocacy event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945163.jpg" alt="Community members participating in youth outreach" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945164.jpg" alt="Magdalene facilitating a school-based SRHR session" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945165.jpg" alt="Magdalene and community partners at a project event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945166.jpg" alt="Young people and partners at an advocacy gathering" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945167.jpg" alt="Magdalene engaging with participants at an event" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/1001945169.jpg" alt="Magdalene speaking during a community radio session" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-item reveal" tabindex="0"><img src="images/anti-gbv-preview.jpg" alt="Anti-GBV advocacy poster featured in the pilot project teaser" loading="lazy" decoding="async" /></figure>
         </div>
     </section>
 
@@ -1882,9 +1951,9 @@
                                     <source src="demo-preview.mp4" type="video/mp4" />
                                     Your browser does not support embedded video.
                                 </video>
-                                <button class="documentary-play-overlay" type="button" aria-label="Play preview with sound">
+                                <button class="documentary-play-overlay" type="button" aria-label="Play teaser">
                                     <i class="fa-solid fa-play" aria-hidden="true"></i>
-                                    <span>Play preview · sound on</span>
+                                    <span>Play teaser</span>
                                 </button>
                             </div>
                             <figcaption>25-second preview · <a class="documentary-play-link" href="https://www.facebook.com/share/v/1K73j3oaae/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook" aria-hidden="true"></i> Watch full video on Facebook <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></figcaption>
