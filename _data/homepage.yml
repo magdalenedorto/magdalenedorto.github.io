@@ -7,3 +7,11 @@ hero_tagline: "I am a multilingual youth and SRHR advocate, student researcher, 
 feedback_thanks_message: "Thank you for your feedback!"
 
 hero_greeting: "Hello, welcome to my portfolio website."
+
+# Onboarding Choices Screen
+explore_heading: "How would you like to explore?"
+explore_subheading: "Choose the pace that works for you. You can change it anytime from the menu."
+mode_pages_title: "One page at a time"
+mode_pages_desc: "Move through each part with clear Back and Next controls."
+mode_flow_title: "Continuous scroll"
+mode_flow_desc: "See the full story in one flowing page and scroll at your own pace."

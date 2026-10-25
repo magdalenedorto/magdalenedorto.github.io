@@ -1673,18 +1673,18 @@ layout: null
         <img class="mode-choice-cover" src="images/1000022395%20%281%29.jpg" alt="Youth advocates working together on community priorities at a planning workshop" fetchpriority="high" decoding="async" />
         <div class="mode-choice-inner">
             <span class="eyebrow">Explore Magdalene's work</span>
-            <h1 id="mode-choice-title">How would you like to explore?</h1>
-            <p class="mode-choice-intro">Choose the pace that works for you. You can change it anytime from the menu.</p>
+            <h1 id="mode-choice-title">{{ site.data.homepage.explore_heading }}</h1>
+            <p class="mode-choice-intro">{{ site.data.homepage.explore_subheading }}</p>
             <div class="mode-options">
                 <button class="mode-option" type="button" data-view-mode="pages">
                     <i class="fa-solid fa-clone" aria-hidden="true"></i>
-                    <strong>One page at a time</strong>
-                    <span>Move through each part with clear Back and Next controls.</span>
+                    <strong>{{ site.data.homepage.mode_pages_title }}</strong>
+                    <span>{{ site.data.homepage.mode_pages_desc }}</span>
                 </button>
                 <button class="mode-option" type="button" data-view-mode="flow">
                     <i class="fa-solid fa-arrows-down-to-line" aria-hidden="true"></i>
-                    <strong>Continuous scroll</strong>
-                    <span>See the full story in one flowing page and scroll at your own pace.</span>
+                    <strong>{{ site.data.homepage.mode_flow_title }}</strong>
+                    <span>{{ site.data.homepage.mode_flow_desc }}</span>
                 </button>
             </div>
         </div>
