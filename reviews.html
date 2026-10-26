@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Feedback & Comments</title>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 40px 20px; }
+        .container { max-width: 650px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: #e05e36; margin-top: 0; }
+        .btn-home { display: inline-block; background: #333; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; margin-bottom: 25px; font-size: 14px; }
+        .feedback-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
+        .feedback-box strong { display: block; margin-bottom: 10px; font-size: 16px; }
+        .notice-banner { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 6px; font-size: 13px; margin-bottom: 20px; font-weight: 500; display: flex; gap: 8px; align-items: center; }
+        .input-field { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px; font-family: inherit; font-size: 15px; }
+        textarea { width: 100%; min-height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; resize: vertical; margin-bottom: 15px; font-family: inherit; font-size: 15px; }
+        .btn-primary { background: #e05e36; color: white; border: none; padding: 14px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; width: 100%; }
+        .btn-primary:hover { background: #c94c26; }
+        
+        /* Pop-up Overlay Styles */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-box { background: white; padding: 25px; border-radius: 10px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .modal-box h3 { margin-top: 0; color: #333; font-size: 18px; }
+        .modal-buttons { display: flex; gap: 12px; margin-top: 20px; justify-content: center; }
+        .modal-btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; min-width: 100px; }
+        .btn-modal-primary { background: #e05e36; color: white; }
+        .btn-modal-secondary { background: #333; color: white; }
+        .btn-modal-cancel { background: #ddd; color: #333; }
+        
+        .hidden-box { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="btn-home"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+    
+    <h2>Share Feedback & Comments</h2>
+    
+    <!-- Refresh Reminder Banner Displayed on Webpage -->
+    <div class="notice-banner">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Note: You can only share one comment at a time. To share another one, you must refresh the page.</span>
+    </div>
+
+    <!-- Active Text Entry Layout Block -->
+    <div id="main-entry-view" class="feedback-box">
+        <strong>How was your experience engaging with us?</strong>
+        <input type="text" id="visitor-name" class="input-field" placeholder="Your Name (Optional)">
+        <textarea id="visitor-message" placeholder="Type your review or comment here..." required></textarea>
+        <button class="btn-primary" type="button" onclick="startSubmitWorkflow()">Submit Review</button>
+    </div>
+
+    <!-- Hidden form processing engine running behind the scenes -->
+    <form id="master-feedback-form" action="https://web3forms.com" method="POST" class="hidden-box">
+        <input type="hidden" name="access_key" value="11e658cf-5446-4987-980b-124156318ec9">
+        <input type="hidden" id="form-subject" name="subject" value="New Portfolio Feedback">
+        <input type="hidden" id="form-privacy" name="Review Privacy" value="Private">
+        <input type="hidden" id="form-name" name="Reviewer Name" value="Anonymous">
+        <textarea name="Feedback Message" id="hidden-textarea"></textarea>
+    </form>
+</div>
+
+<!-- POP-UP 1: Display Choice to Visitor -->
+<div id="privacy-modal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>Make comment / feedback:</h3>
+        <p>Would you like this review to be private to us or visible to the public?</p>
+        <div class="modal-buttons">
+            <button class="modal-btn btn-modal-primary" onclick="choosePrivacy('private')">Private</button>
+            <button class="modal-btn btn-modal-secondary" onclick="choosePrivacy('public')">Public</button>
+        </div>
+    </div>
+</div>
+
+<!-- POP-UP 2: Display Final Submission Check to Visitor -->
+<div id="confirm-modal" class="modal-overlay">
+    <div class="modal-box">
+        <h3>Submit feedback/comment?</h3>
+        <p>Are you sure you want to finalize and post this message?</p>
+        <div class="modal-buttons">
+            <button class="modal-btn btn-modal-primary" onclick="executeFinalSubmission()">Yes</button>
+            <button class="modal-btn btn-modal-cancel" onclick="closeConfirmModal()">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Interactive Modal Popup Scripts -->
+<script>
+    let userReviewText = "";
+    let userReviewName = "";
+    let chosenPrivacyType = "";
+
+    function startSubmitWorkflow() {
+        userReviewText = document.getElementById('visitor-message').value.trim();
+        userReviewName = document.getElementById('visitor-name').value.trim() || "Anonymous";
+        
+        if (!userReviewText) {
+            alert("Please type your comment before submitting!");
+            return;
+        }
+        document.getElementById('privacy-modal').style.display = 'flex';
+    }
+
+    function choosePrivacy(type) {
+        chosenPrivacyType = type;
+        document.getElementById('privacy-modal').style.display = 'none';
+        document.getElementById('confirm-modal').style.display = 'flex';
+    }
+
+    function closeConfirmModal() {
+        document.getElementById('confirm-modal').style.display = 'none';
+    }
+
+    function executeFinalSubmission() {
+        document.getElementById('confirm-modal').style.display = 'none';
+        
+        document.getElementById('hidden-textarea').value = userReviewText;
+        document.getElementById('form-name').value = userReviewName;
+        
+        if (chosenPrivacyType === 'private') {
+            document.getElementById('form-subject').value = "🔒 NEW PRIVATE FEEDBACK";
+            document.getElementById('form-privacy').value = "Private (Keep Hidden)";
+        } else {
+            document.getElementById('form-subject').value = "📢 NEW PUBLIC REVIEW";
+            document.getElementById('form-privacy').value = "Public (Approved to display)";
+        }
+        
+        document.getElementById('master-feedback-form').submit();
+    }
+</script>
+
+</body>
+</html>
