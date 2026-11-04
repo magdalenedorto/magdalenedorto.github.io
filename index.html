@@ -16,7 +16,7 @@ layout: null
             --primary-blue: #173b57;
             --secondary-blue: #2f7898;
             --accent-orange: #df682e;
-            --accent-pink: #ef9a58;
+            --accent-orange-soft: #ef9a58;
             --accent-brown: #b84f24;
             --bg-light: #f7f9fb;
             --surface-white: #ffffff;
@@ -340,7 +340,7 @@ layout: null
 
         .hero-title-badge span:nth-child(1) i { color: var(--accent-orange); }
         .hero-title-badge span:nth-child(2) i { color: var(--secondary-blue); }
-        .hero-title-badge span:nth-child(3) i { color: var(--accent-pink); }
+        .hero-title-badge span:nth-child(3) i { color: var(--accent-orange-soft); }
         .hero-title-badge span:nth-child(4) i { color: var(--secondary-blue); }
 
         .hero h1 {
@@ -533,7 +533,7 @@ layout: null
         }
 
         .mode-choice .eyebrow { display: inline-block; margin-bottom: 0.8rem; color: #ffbd7e; }
-        .mode-choice h1 { max-width: 700px; margin-bottom: 0.8rem; color: #fff; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.1; }
+        .mode-choice h1 { max-width: 700px; margin-bottom: 0.8rem; color: #fff; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.1; overflow-wrap: anywhere; }
         .mode-choice-intro { max-width: 580px; color: rgba(255, 255, 255, 0.92); }
 
         .mode-options {
@@ -569,8 +569,8 @@ layout: null
         }
 
         .mode-option i { margin-bottom: 1rem; color: var(--accent-orange); font-size: 1.3rem; }
-        .mode-option strong { margin-bottom: 0.4rem; color: var(--primary-blue); font-size: 1.05rem; }
-        .mode-option span { color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; }
+        .mode-option strong { margin-bottom: 0.4rem; color: var(--primary-blue); font-size: 1.05rem; overflow-wrap: anywhere; }
+        .mode-option span { color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; overflow-wrap: anywhere; }
 
         .slide-container.flow-mode .slide {
             display: block;
@@ -697,7 +697,7 @@ layout: null
         }
 
         .eyebrow {
-            color: var(--accent-pink);
+            color: var(--accent-orange-soft);
             font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 0.12em;
@@ -975,7 +975,7 @@ layout: null
         .value-letter {
             font-size: 1rem;
             font-weight: 800;
-            color: var(--accent-pink);
+            color: var(--accent-orange-soft);
             margin: 0;
         }
 
@@ -992,7 +992,7 @@ layout: null
             width: min(900px, 100%);
             padding: 1.4rem 1.7rem;
             border-radius: 18px;
-            border-left: 4px solid var(--accent-pink);
+            border-left: 4px solid var(--accent-orange-soft);
         }
 
         .value-summary .value-letter { display: inline; margin-right: 0.4rem; }
@@ -1029,7 +1029,7 @@ layout: null
             transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
-        .booking-card:hover, .credential-card:hover { transform: translateY(-6px); border-color: var(--accent-pink); }
+        .booking-card:hover, .credential-card:hover { transform: translateY(-6px); border-color: var(--accent-orange-soft); }
         .booking-card h3, .credential-card h3 { color: var(--primary-blue); font-size: 1.35rem; margin: 0.5rem 0; }
         .price { color: var(--accent-orange); font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 800; }
         .booking-card p, .credential-card p { color: var(--text-muted); }
@@ -1038,7 +1038,7 @@ layout: null
         .whatsapp-link { color: #15803d; font-weight: 800; }
 
         .profile-header { position: relative; display: flex; align-items: center; gap: 0.75rem; }
-        .profile-header img { width: 48px; height: 48px; object-fit: cover; border-radius: 50%; border: 3px solid var(--accent-pink); }
+        .profile-header img { width: 48px; height: 48px; object-fit: cover; border-radius: 50%; border: 3px solid var(--accent-orange-soft); }
         .profile-badge { position: absolute; left: 38px; top: 38px; white-space: nowrap; background: var(--primary-blue); color: #fff; padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; }
         .gallery-hero { position: relative; aspect-ratio: 2.15 / 1; min-height: 360px; margin-bottom: 1rem; overflow: hidden; border-radius: 24px; box-shadow: var(--card-shadow); background: #283453; }
         .gallery-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
@@ -1559,9 +1559,13 @@ layout: null
 
             .nav-links { right: 1rem; }
 
-            .mode-choice { min-height: min(820px, calc(100svh - 72px)); padding: 2rem 1rem; align-items: end; }
-            .mode-choice::before { background: linear-gradient(180deg, rgba(14, 39, 59, 0.08) 0%, rgba(14, 39, 59, 0.28) 28%, rgba(14, 39, 59, 0.96) 100%); }
-            .mode-choice-cover { object-position: 54% center; }
+            .mode-choice { display: block; min-height: 0; padding: 0 0 2rem; background: var(--bg-light); }
+            .mode-choice::before { display: none; }
+            .mode-choice-cover { position: relative; z-index: auto; display: block; width: 100%; height: clamp(155px, 48vw, 220px); object-position: center bottom; }
+            .mode-choice-inner { width: 100%; padding: 1.6rem 1rem 0; margin: 0 auto; text-align: left; }
+            .mode-choice .eyebrow { color: var(--accent-orange); }
+            .mode-choice h1 { color: var(--primary-blue); font-size: 2rem; }
+            .mode-choice-intro { color: var(--text-muted); }
             .mode-options { grid-template-columns: 1fr; gap: 0.65rem; margin-top: 1.1rem; }
             .mode-option { min-height: 0; padding: 0.85rem 1rem; grid-template-columns: 28px 1fr; column-gap: 0.7rem; }
             .mode-option i { grid-row: span 2; margin: 0.15rem 0 0; }
@@ -1913,7 +1917,7 @@ layout: null
         <div class="credential-grid">
             <article class="credential-card reveal"><i class="fa-solid fa-globe" style="color: var(--secondary-blue); font-size: 1.4rem;"></i><h3>Global youth fellowships</h3><p>Represented Ghana as an IPPF Global Youth Connect Fellow, Oxfam Power to Choose Youth Forum member, SheDecides Regional Organizer, and Kufuor Scholar.</p></article>
             <article class="credential-card reveal"><i class="fa-solid fa-chalkboard-user" style="color: var(--accent-orange); font-size: 1.4rem;"></i><h3>Digital health & CSE training</h3><p>Co-designed a Digital Global Comprehensive Sexuality Education course for the UNFPA Global Academy and continues to connect digital tools with youth health education.</p></article>
-            <article class="credential-card reveal"><i class="fa-solid fa-people-group" style="color: var(--accent-pink); font-size: 1.4rem;"></i><h3>Governance & conferences</h3><p>Served on the Governing Council of PPAG from 2022–2025 and as YAM National Treasurer, contributing to youth-led conversations and community initiatives.</p></article>
+            <article class="credential-card reveal"><i class="fa-solid fa-people-group" style="color: var(--accent-orange-soft); font-size: 1.4rem;"></i><h3>Governance & conferences</h3><p>Served on the Governing Council of PPAG from 2022–2025 and as YAM National Treasurer, contributing to youth-led conversations and community initiatives.</p></article>
             <article class="credential-card reveal"><i class="fa-solid fa-award" style="color: var(--secondary-blue); font-size: 1.4rem;"></i><h3>Honours & campaigns</h3><p>District winner of the Nneka Youth Foundation Inter-District Spelling Bee for North Tongu and a leader of the #16days4amilliongirls mural advocacy campaign.</p></article>
         </div>
     </section>
@@ -1933,7 +1937,7 @@ layout: null
             </div>
 
             <div class="info-card">
-                <h3><i class="fa-solid fa-heart" style="color: var(--accent-pink);"></i> Passions & hobbies</h3>
+                <h3><i class="fa-solid fa-heart" style="color: var(--accent-orange-soft);"></i> Passions & hobbies</h3>
                 <p>When I am not working, you can find me being a DIY Girly or simply enjoying these hobbies:</p>
                 <div class="hobby-pills">
                     <span class="pill"><i class="fa-solid fa-music"></i> Reguetón music </span>
@@ -2300,13 +2304,25 @@ layout: null
 
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightbox-image');
-        const closeLightbox = () => lightbox.classList.remove('open');
+        const lightboxStatus = document.getElementById('lightbox-status');
+        const galleryItems = [...document.querySelectorAll('.gallery-item')];
+        let currentGalleryIndex = 0;
 
-        document.querySelectorAll('.gallery-item').forEach(item => {
+        function showGalleryImage(index) {
+            currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+            const image = galleryItems[currentGalleryIndex].querySelector('img');
+            lightboxImage.src = image.currentSrc || image.src;
+            lightboxImage.alt = image.alt;
+            lightboxStatus.textContent = `${currentGalleryIndex + 1} / ${galleryItems.length}`;
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+        }
+
+        galleryItems.forEach((item, index) => {
             const openLightbox = () => {
-                const image = item.querySelector('img');
-                lightboxImage.src = image.src;
-                lightboxImage.alt = image.alt;
+                showGalleryImage(index);
                 lightbox.classList.add('open');
             };
             item.addEventListener('click', openLightbox);
@@ -2318,16 +2334,26 @@ layout: null
             });
         });
 
+        document.getElementById('lightbox-previous').addEventListener('click', () => showGalleryImage(currentGalleryIndex - 1));
+        document.getElementById('lightbox-next').addEventListener('click', () => showGalleryImage(currentGalleryIndex + 1));
         document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', event => {
             if (event.target === lightbox) closeLightbox();
         });
         document.addEventListener('keydown', event => {
+            if (!lightbox.classList.contains('open')) return;
             if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowLeft') showGalleryImage(currentGalleryIndex - 1);
+            if (event.key === 'ArrowRight') showGalleryImage(currentGalleryIndex + 1);
         });
 
-        document.getElementById('live-review').addEventListener('click', () => document.getElementById('feedback-box').classList.toggle('open'));
-        document.getElementById('feedback-box').addEventListener('submit', event => { event.preventDefault(); event.target.innerHTML = '<strong>Thank you for your feedback!</strong>'; });
+        const feedbackForm = document.getElementById('feedback-box');
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', event => {
+                event.preventDefault();
+                event.target.innerHTML = '<strong>Thank you for your feedback!</strong>';
+            });
+        }
         document.querySelectorAll('.currency').forEach(button => button.addEventListener('click', () => { button.textContent = button.textContent.trim() === '$20' ? 'GH₵260' : 'GH₵650'; }));
 
         const documentaryPreview = document.querySelector('.documentary-preview');
@@ -2391,6 +2417,5 @@ layout: null
 
           </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script src="reviews-automation.js"></script>
 </body>
 </html>

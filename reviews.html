@@ -1,5 +1,5 @@
 ---
-layout: none
+layout: null
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,132 +7,96 @@ layout: none
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Share Feedback & Comments</title>
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 40px 20px; }
-        .container { max-width: 650px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: #e05e36; margin-top: 0; }
-        .btn-home { display: inline-block; background: #333; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; margin-bottom: 25px; font-size: 14px; }
-        .feedback-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-        .feedback-box strong { display: block; margin-bottom: 10px; font-size: 16px; }
-        .notice-banner { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 6px; font-size: 13px; margin-bottom: 20px; font-weight: 500; display: flex; gap: 8px; align-items: center; }
-        .input-field { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 15px; font-family: inherit; font-size: 15px; }
-        textarea { width: 100%; min-height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; resize: vertical; margin-bottom: 15px; font-family: inherit; font-size: 15px; }
-        .btn-primary { background: #e05e36; color: white; border: none; padding: 14px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; width: 100%; }
-        .btn-primary:hover { background: #c94c26; }
-        
-        /* Pop-up Overlay Styles */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-box { background: white; padding: 25px; border-radius: 10px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .modal-box h3 { margin-top: 0; color: #333; font-size: 18px; }
-        .modal-buttons { display: flex; gap: 12px; margin-top: 20px; justify-content: center; }
-        .modal-btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; min-width: 100px; }
-        .btn-modal-primary { background: #e05e36; color: white; }
-        .btn-modal-secondary { background: #333; color: white; }
-        .btn-modal-cancel { background: #ddd; color: #333; }
-        
-        .hidden-box { display: none !important; }
+        :root { color-scheme: light; --navy: #173b57; --blue: #2f7898; --orange: #df682e; --paper: #f7f9fb; --ink: #21313f; --muted: #526574; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: clamp(1.25rem, 5vw, 3.5rem) 1rem; background: linear-gradient(145deg, #fff7ed, var(--paper) 46%, #edf4f8); color: var(--ink); font-family: "Plus Jakarta Sans", sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: var(--navy); font-family: "Playfair Display", serif; letter-spacing: 0; }
+        .container { width: min(760px, 100%); margin: 0 auto; }
+        .btn-home { display: inline-flex; align-items: center; gap: 0.55rem; margin-bottom: 1.4rem; color: var(--navy); font-weight: 800; text-decoration: none; }
+        .btn-home:hover { color: var(--orange); }
+        .page-heading { margin: 0 0 0.5rem; font-size: clamp(2rem, 5vw, 3rem); }
+        .page-intro { margin: 0 0 1.25rem; color: var(--muted); }
+        .notice-banner { display: flex; gap: 0.7rem; align-items: start; margin-bottom: 1rem; padding: 0.9rem 1rem; border-left: 4px solid var(--orange); border-radius: 8px; background: #fff; color: var(--muted); font-size: 0.9rem; }
+        .feedback-box { display: grid; gap: 0.8rem; margin: 0 0 2.5rem; padding: clamp(1rem, 4vw, 1.6rem); border: 1px solid rgba(23, 59, 87, 0.12); border-radius: 10px; background: #fff; box-shadow: 0 14px 40px rgba(23, 59, 87, 0.09); }
+        .feedback-box label, .feedback-box legend { color: var(--navy); font-size: 0.9rem; font-weight: 700; }
+        .input-field, .feedback-box textarea { width: 100%; min-height: 46px; padding: 0.7rem 0.8rem; border: 1px solid #cbd6de; border-radius: 7px; background: #fff; color: var(--ink); font: inherit; }
+        .feedback-box textarea { min-height: 150px; resize: vertical; }
+        .input-field:focus, .feedback-box textarea:focus { outline: 3px solid rgba(47, 120, 152, 0.2); border-color: var(--blue); }
+        .privacy-choice { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin: 0; padding: 0.9rem; border: 1px solid rgba(23, 59, 87, 0.12); border-radius: 8px; }
+        .privacy-choice legend { padding: 0 0.35rem; }
+        .privacy-option { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+        .privacy-option input { accent-color: var(--orange); }
+        .btn-primary { min-height: 48px; padding: 0.8rem 1rem; border: 0; border-radius: 7px; background: var(--orange); color: white; font: inherit; font-weight: 800; cursor: pointer; }
+        .btn-primary:hover { background: #bd4f24; }
+        .btn-primary:disabled { opacity: 0.65; cursor: wait; }
+        .feedback-status { min-height: 1.5rem; margin: 0; color: var(--muted); font-size: 0.9rem; }
+        .feedback-status[data-state="error"] { color: #a52e22; }
+        .feedback-status[data-state="success"] { color: #176345; }
+        .public-reviews h2 { margin-bottom: 1rem; }
+        #live-reviews-grid { display: grid; gap: 0.85rem; }
+        .review-card { padding: 1rem 1.1rem; border-left: 4px solid var(--orange); border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(23, 59, 87, 0.07); }
+        .review-card-header { display: flex; justify-content: space-between; gap: 1rem; color: var(--navy); font-weight: 700; }
+        .review-card-location { color: var(--muted); font-size: 0.82rem; }
+        .review-card-rating { margin: 0.4rem 0; color: var(--orange); }
+        .review-card-comment { margin: 0; overflow-wrap: anywhere; }
+        .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+        @media (max-width: 520px) { .review-card-header { flex-direction: column; gap: 0.2rem; } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="index.html" class="btn-home"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
-    
-    <h2>Share Feedback & Comments</h2>
-    
-    <!-- Refresh Reminder Banner Displayed on Webpage -->
+<main class="container">
+    <a href="index.html" class="btn-home"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Portfolio</a>
+    <h1 class="page-heading">Share Feedback &amp; Comments</h1>
+    <p class="page-intro">Your feedback helps strengthen youth-led community work.</p>
+
     <div class="notice-banner">
-        <i class="fa-solid fa-circle-info"></i>
-        <span>Note: You can only share one comment at a time. To share another one, you must refresh the page.</span>
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        <span>Private feedback is emailed to the project team. Public reviews can be displayed on this page.</span>
     </div>
 
-    <!-- Active Text Entry Layout Block -->
-    <div id="main-entry-view" class="feedback-box">
-        <strong>How was your experience engaging with us?</strong>
-        <input type="text" id="visitor-name" class="input-field" placeholder="Your Name (Optional)">
-        <textarea id="visitor-message" placeholder="Type your review or comment here..." required></textarea>
-        <button class="btn-primary" type="button" onclick="startSubmitWorkflow()">Submit Review</button>
-    </div>
+    <form id="feedback-form" class="feedback-box">
+        <label for="visitor-name">Your name <span>(optional)</span></label>
+        <input class="input-field" type="text" id="visitor-name" name="name" autocomplete="name" maxlength="100" placeholder="Your name">
 
-    <!-- Hidden form processing engine running behind the scenes -->
-    <form id="master-feedback-form" action="https://web3forms.com" method="POST" class="hidden-box">
+        <label for="visitor-email">Email <span>(optional, if you’d like a reply)</span></label>
+        <input class="input-field" type="email" id="visitor-email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com">
+
+        <label for="visitor-location">Location <span>(optional)</span></label>
+        <input class="input-field" type="text" id="visitor-location" name="visitor_location" maxlength="100" placeholder="City or country">
+
+        <label for="visitor-rating">Rating</label>
+        <select class="input-field" id="visitor-rating" name="rating">
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
+        </select>
+
+        <fieldset class="privacy-choice">
+            <legend>How may we use your feedback?</legend>
+            <label class="privacy-option"><input type="radio" name="privacy" value="private" checked> Keep it private</label>
+            <label class="privacy-option"><input type="radio" name="privacy" value="public"> Share it as a public review</label>
+        </fieldset>
+
+        <label for="visitor-message">Your feedback</label>
+        <textarea id="visitor-message" name="message" minlength="3" maxlength="3000" placeholder="Type your review or comment here..." required></textarea>
+        <div class="honeypot" aria-hidden="true"><label for="botcheck">Leave this field empty</label><input id="botcheck" name="botcheck" type="text" tabindex="-1" autocomplete="off"></div>
         <input type="hidden" name="access_key" value="11e658cf-5446-4987-980b-124156318ec9">
-        <input type="hidden" id="form-subject" name="subject" value="New Portfolio Feedback">
-        <input type="hidden" id="form-privacy" name="Review Privacy" value="Private">
-        <input type="hidden" id="form-name" name="Reviewer Name" value="Anonymous">
-        <textarea name="Feedback Message" id="hidden-textarea"></textarea>
+        <button class="btn-primary" type="submit">Send feedback</button>
+        <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
     </form>
-</div>
 
-<!-- POP-UP 1: Display Choice to Visitor -->
-<div id="privacy-modal" class="modal-overlay">
-    <div class="modal-box">
-        <h3>Make comment / feedback:</h3>
-        <p>Would you like this review to be private to us or visible to the public?</p>
-        <div class="modal-buttons">
-            <button class="modal-btn btn-modal-primary" onclick="choosePrivacy('private')">Private</button>
-            <button class="modal-btn btn-modal-secondary" onclick="choosePrivacy('public')">Public</button>
-        </div>
-    </div>
-</div>
-
-<!-- POP-UP 2: Display Final Submission Check to Visitor -->
-<div id="confirm-modal" class="modal-overlay">
-    <div class="modal-box">
-        <h3>Submit feedback/comment?</h3>
-        <p>Are you sure you want to finalize and post this message?</p>
-        <div class="modal-buttons">
-            <button class="modal-btn btn-modal-primary" onclick="executeFinalSubmission()">Yes</button>
-            <button class="modal-btn btn-modal-cancel" onclick="closeConfirmModal()">No</button>
-        </div>
-    </div>
-</div>
-
-<!-- Interactive Modal Popup Scripts -->
-<script>
-    let userReviewText = "";
-    let userReviewName = "";
-    let chosenPrivacyType = "";
-
-    function startSubmitWorkflow() {
-        userReviewText = document.getElementById('visitor-message').value.trim();
-        userReviewName = document.getElementById('visitor-name').value.trim() || "Anonymous";
-        
-        if (!userReviewText) {
-            alert("Please type your comment before submitting!");
-            return;
-        }
-        document.getElementById('privacy-modal').style.display = 'flex';
-    }
-
-    function choosePrivacy(type) {
-        chosenPrivacyType = type;
-        document.getElementById('privacy-modal').style.display = 'none';
-        document.getElementById('confirm-modal').style.display = 'flex';
-    }
-
-    function closeConfirmModal() {
-        document.getElementById('confirm-modal').style.display = 'none';
-    }
-
-    function executeFinalSubmission() {
-        document.getElementById('confirm-modal').style.display = 'none';
-        
-        document.getElementById('hidden-textarea').value = userReviewText;
-        document.getElementById('form-name').value = userReviewName;
-        
-        if (chosenPrivacyType === 'private') {
-            document.getElementById('form-subject').value = "🔒 NEW PRIVATE FEEDBACK";
-            document.getElementById('form-privacy').value = "Private (Keep Hidden)";
-        } else {
-            document.getElementById('form-subject').value = "📢 NEW PUBLIC REVIEW";
-            document.getElementById('form-privacy').value = "Public (Approved to display)";
-        }
-        
-        document.getElementById('master-feedback-form').submit();
-    }
-</script>
+    <section class="public-reviews" aria-labelledby="public-reviews-title">
+        <h2 id="public-reviews-title">Public reviews</h2>
+        <div id="live-reviews-grid" aria-live="polite"><p>Loading public reviews...</p></div>
+    </section>
+</main>
+<script src="reviews.js" defer></script>
 
 </body>
 </html>
