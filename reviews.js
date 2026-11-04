@@ -5,6 +5,42 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 const feedbackForm = document.getElementById('feedback-form');
 const feedbackStatus = document.getElementById('feedback-status');
 const reviewsGrid = document.getElementById('live-reviews-grid');
+const ratingInput = document.getElementById('visitor-rating');
+const ratingButtons = [...document.querySelectorAll('.rating-control [role="radio"]')];
+
+function setRating(value, focus = false) {
+    const rating = Math.min(5, Math.max(1, Number(value) || 5));
+    ratingInput.value = String(rating);
+    ratingButtons.forEach(button => {
+        const buttonRating = Number(button.dataset.rating);
+        button.setAttribute('aria-checked', String(buttonRating === rating));
+        button.classList.toggle('is-selected', buttonRating <= rating);
+        button.querySelector('i').className = buttonRating <= rating ? 'fa-solid fa-star' : 'fa-regular fa-star';
+        if (focus && buttonRating === rating) button.focus();
+    });
+}
+
+ratingButtons.forEach(button => {
+    button.addEventListener('click', () => setRating(button.dataset.rating));
+    button.addEventListener('keydown', event => {
+        const currentRating = Number(ratingInput.value) || 5;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            setRating(Math.min(5, currentRating + 1), true);
+        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+            event.preventDefault();
+            setRating(Math.max(1, currentRating - 1), true);
+        } else if (event.key === 'Home') {
+            event.preventDefault();
+            setRating(1, true);
+        } else if (event.key === 'End') {
+            event.preventDefault();
+            setRating(5, true);
+        }
+    });
+});
+
+setRating(ratingInput.value);
 
 function setFeedbackStatus(message, state) {
     feedbackStatus.textContent = message;
@@ -86,13 +122,14 @@ feedbackForm.addEventListener('submit', async event => {
                 visitor_location: visitorLocation,
                 star_rating: rating,
                 public_comment: comment,
-                privacy: 'public'
+                privacy: 'public',
+                moderation_status: 'pending'
             })
             : Promise.resolve()
     ]);
 
     const emailSent = emailResult.status === 'fulfilled';
-    const reviewPublished = privacy === 'public' && reviewResult.status === 'fulfilled';
+    const reviewQueued = privacy === 'public' && reviewResult.status === 'fulfilled';
 
     if (privacy === 'private') {
         if (emailSent) {
@@ -102,17 +139,21 @@ feedbackForm.addEventListener('submit', async event => {
             console.error('Web3Forms submission failed:', emailResult.reason);
             setFeedbackStatus('We could not email your feedback. Please try again later or contact the team directly.', 'error');
         }
-    } else if (reviewPublished && emailSent) {
-        setFeedbackStatus('Thank you. Your review was published and an email notification was sent to the team.', 'success');
+    } else if (reviewQueued && emailSent) {
+        setFeedbackStatus('Thank you. Your review request was emailed to the team and is waiting for approval before it appears publicly.', 'success');
         feedbackForm.reset();
-        loadPublicReviews();
-    } else if (reviewPublished) {
+    } else if (reviewQueued) {
         console.error('Web3Forms notification failed:', emailResult.reason);
-        setFeedbackStatus('Your public review was saved, but the email notification failed.', 'error');
-        loadPublicReviews();
+        setFeedbackStatus('Your review request is waiting for approval, but its email notification failed.', 'error');
+        feedbackForm.reset();
     } else if (emailSent) {
         console.error('Supabase insert failed:', reviewResult.reason);
-        setFeedbackStatus('Your feedback email was sent, but the public review could not be saved. Check the Supabase table and row-level security setup.', 'error');
+        const supabaseError = String(reviewResult.reason?.message || '');
+        if (supabaseError.includes('42703') && supabaseError.includes('privacy')) {
+            setFeedbackStatus('Your email was sent, but public reviews are not set up yet. Run supabase/reviews-policies.sql in the Supabase SQL Editor, then try again.', 'error');
+        } else {
+            setFeedbackStatus('Your email was sent, but your public review request could not be queued. Check the Supabase table and row-level security setup.', 'error');
+        }
     } else {
         console.error('Feedback delivery failed:', { email: emailResult.reason, review: reviewResult.reason });
         setFeedbackStatus('Feedback could not be delivered. Check the Web3Forms access key and Supabase project configuration, then try again.', 'error');
@@ -129,6 +170,7 @@ async function loadPublicReviews() {
         const query = new URLSearchParams({
             select: 'visitor_name,visitor_location,star_rating,public_comment,created_at',
             privacy: 'eq.public',
+            moderation_status: 'eq.published',
             order: 'created_at.desc',
             limit: '50'
         });
@@ -138,7 +180,10 @@ async function loadPublicReviews() {
                 Authorization: `Bearer ${SUPABASE_ANON_KEY}`
             }
         });
-        if (!response.ok) throw new Error(`Supabase returned ${response.status}`);
+        if (!response.ok) {
+            const details = await response.text().catch(() => '');
+            throw new Error(`Supabase returned ${response.status}: ${details.slice(0, 300)}`);
+        }
         const reviews = await response.json();
         reviewsGrid.replaceChildren();
 
@@ -164,7 +209,15 @@ async function loadPublicReviews() {
 
             const rating = document.createElement('p');
             rating.className = 'review-card-rating';
-            rating.textContent = `${'★'.repeat(Math.max(1, Math.min(5, Number(review.star_rating) || 5)))}${'☆'.repeat(5 - Math.max(1, Math.min(5, Number(review.star_rating) || 5)))}`;
+            const starCount = Math.min(5, Math.max(1, Number(review.star_rating) || 5));
+            rating.setAttribute('role', 'img');
+            rating.setAttribute('aria-label', `${starCount} out of 5 stars`);
+            for (let index = 0; index < 5; index += 1) {
+                const star = document.createElement('i');
+                star.className = index < starCount ? 'fa-solid fa-star' : 'fa-regular fa-star';
+                star.setAttribute('aria-hidden', 'true');
+                rating.append(star);
+            }
 
             const comment = document.createElement('p');
             comment.className = 'review-card-comment';
@@ -176,7 +229,10 @@ async function loadPublicReviews() {
         console.error('Could not load public reviews:', error);
         reviewsGrid.replaceChildren();
         const message = document.createElement('p');
-        message.textContent = 'Public reviews are temporarily unavailable.';
+        const errorDetails = String(error.message || '');
+        message.textContent = errorDetails.includes('42703') && errorDetails.includes('privacy')
+            ? 'Public reviews need database setup. The site owner must run supabase/reviews-policies.sql in the Supabase SQL Editor.'
+            : 'Public reviews are temporarily unavailable.';
         reviewsGrid.append(message);
     }
 }

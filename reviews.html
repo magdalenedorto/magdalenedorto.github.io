@@ -29,6 +29,10 @@ layout: null
         .privacy-choice legend { padding: 0 0.35rem; }
         .privacy-option { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
         .privacy-option input { accent-color: var(--orange); }
+        .rating-control { display: inline-flex; align-items: center; gap: 0.25rem; width: max-content; }
+        .rating-control button { padding: 0.2rem; border: 0; background: transparent; color: #b7c3ca; font-size: 1.8rem; cursor: pointer; }
+        .rating-control button.is-selected { color: var(--orange); }
+        .rating-control button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
         .btn-primary { min-height: 48px; padding: 0.8rem 1rem; border: 0; border-radius: 7px; background: var(--orange); color: white; font: inherit; font-weight: 800; cursor: pointer; }
         .btn-primary:hover { background: #bd4f24; }
         .btn-primary:disabled { opacity: 0.65; cursor: wait; }
@@ -40,7 +44,8 @@ layout: null
         .review-card { padding: 1rem 1.1rem; border-left: 4px solid var(--orange); border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(23, 59, 87, 0.07); }
         .review-card-header { display: flex; justify-content: space-between; gap: 1rem; color: var(--navy); font-weight: 700; }
         .review-card-location { color: var(--muted); font-size: 0.82rem; }
-        .review-card-rating { margin: 0.4rem 0; color: var(--orange); }
+        .review-card-rating { display: flex; gap: 0.16rem; margin: 0.4rem 0; color: var(--orange); }
+        .review-card-rating .fa-regular { color: #b7c3ca; }
         .review-card-comment { margin: 0; overflow-wrap: anywhere; }
         .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
         @media (max-width: 520px) { .review-card-header { flex-direction: column; gap: 0.2rem; } }
@@ -68,14 +73,15 @@ layout: null
         <label for="visitor-location">Location <span>(optional)</span></label>
         <input class="input-field" type="text" id="visitor-location" name="visitor_location" maxlength="100" placeholder="City or country">
 
-        <label for="visitor-rating">Rating</label>
-        <select class="input-field" id="visitor-rating" name="rating">
-            <option value="5">5 stars</option>
-            <option value="4">4 stars</option>
-            <option value="3">3 stars</option>
-            <option value="2">2 stars</option>
-            <option value="1">1 star</option>
-        </select>
+        <span id="rating-label" class="rating-label">Your rating</span>
+        <input type="hidden" id="visitor-rating" name="rating" value="5">
+        <div class="rating-control" role="radiogroup" aria-labelledby="rating-label">
+            <button type="button" role="radio" aria-label="1 star" aria-checked="false" data-rating="1"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+            <button type="button" role="radio" aria-label="2 stars" aria-checked="false" data-rating="2"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+            <button type="button" role="radio" aria-label="3 stars" aria-checked="false" data-rating="3"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+            <button type="button" role="radio" aria-label="4 stars" aria-checked="false" data-rating="4"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+            <button type="button" role="radio" aria-label="5 stars" aria-checked="true" data-rating="5"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+        </div>
 
         <fieldset class="privacy-choice">
             <legend>How may we use your feedback?</legend>
