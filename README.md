@@ -13,7 +13,7 @@ Personal portfolio website for Magdalene Dorto.
 
 The form sends every submission to Web3Forms at `https://api.web3forms.com/submit`. Its access key must be active in the Web3Forms dashboard, and the destination inbox must be verified there.
 
-Private feedback is emailed only. Public reviews are emailed and inserted into `public.portfolio_reviews`. The browser uses a Supabase **anon** key; never put a service-role key in site files. In the Supabase SQL Editor, run `supabase/reviews-policies.sql` once to add the privacy column, enable row-level security, and allow anonymous users to read and insert only public reviews. Existing rows are treated as private by that migration.
+Private feedback is emailed only. Public reviews are emailed and inserted into `public.portfolio_reviews`. The browser uses a Supabase **anon** key; never put a service-role key in site files. In the Supabase SQL Editor, run `supabase/reviews-policies.sql` once to create/complete the table, add the privacy column, enable row-level security, and allow anonymous users to read and insert only public reviews. Existing rows are treated as private by that migration. The migration replaces all existing RLS policies on this table; review them first if the project has separate admin policies that must be retained.
 
 Keep the Supabase project URL and anon key in `reviews.js` synchronized with the project settings. If the review list or public submission fails, check the browser Network/Console for the Supabase response and confirm that the project is active, the URL is correct, the `portfolio_reviews` columns match the script, and the migration has run.
 
